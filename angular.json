@@ -24,12 +24,13 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/assets/css/bootstrap.css"
+              "src/assets/css/bootstrap.css",
+              "src/assets/css/semantic.css"
             ],
             "scripts": [
               "src/assets/js/jquery-3.3.1.js",
-              "src/assets/js/bootstrap.bundle.js"
-
+              "src/assets/js/bootstrap.bundle.js",
+              "src/assets/js/semantic.js"
             ]
           },
           "configurations": {
