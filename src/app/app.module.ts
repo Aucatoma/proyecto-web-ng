@@ -11,6 +11,8 @@ import {FormsModule} from '@angular/forms';
 import {LoginAuthService} from './authorization/login-auth.service';
 import { MenuComponent } from './menu/menu.component';
 import {LibroService} from './service/libro.service';
+import {BarraBusquedaComponent} from './barra-busqueda/barra-busqueda.component';
+import { CardBookComponent } from './card-book/card-book.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import {LibroService} from './service/libro.service';
     CarruselComponent,
     LoginComponent,
     HomeComponent,
-    MenuComponent
+    MenuComponent,
+    BarraBusquedaComponent,
+    CardBookComponent,
   ],
   imports: [
     BrowserModule,

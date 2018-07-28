@@ -1,0 +1,46 @@
+<div class="container-fluid" style="padding-top: 50px">
+  <div class="row justify-content-center" style="margin-bottom: 0px">
+    <div class="col-6 input-group mb-3">
+      <div class="input-group-prepend">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{filtro}}</button>
+        <div class="dropdown-menu">
+          <a (click)="changeNameOfDropDownFilter('Genero')" class="dropdown-item mano">Genero</a>
+          <a (click)="changeNameOfDropDownFilter('Editorial')" class="dropdown-item mano">Editorial</a>
+          <a (click)="changeNameOfDropDownFilter('Autor')" class="dropdown-item mano">Autor</a>
+          <a (click)="changeNameOfDropDownFilter('Libro')" class="dropdown-item mano">Libro</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <input (click)="showDropDown(textoABuscar)" (keyup)="onKey($event)" class="form-control" type="text" placeholder="Search" [value]="textoABuscar" aria-label="Recipient" style="width: 477px">
+        <div id="dropDownSearchContent" class="dropdown-menu" style="width: 477px" >
+          <ul class="list-group list-group-flush">
+            <li *ngFor="let libro of libros"
+                (click)="fillSearchBar($event, libro.nombre); showDropDown()"
+                class="mano
+                list-group-item
+                  list-group-item-action
+                  d-flex
+                  justify-content-between
+                  align-items-center"
+            ><a>{{libro.nombre}}</a>
+              <span class="badge badge-secondary badge-pill">Año: {{libro.anio}}</span>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="input-group-append">
+        <button (click)="onClickMe()" class="btn btn-outline-secondary" type="button">Buscar</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+

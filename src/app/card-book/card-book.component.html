@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div *ngFor="let libro of libros" class="col-4 d-flex justify-content-around align-self-center " href="#" style="padding-top: 50px">
+      <div class="card mx-auto mano" style="width: 18rem;">
+        <img class="card-img-top" src="https://images-na.ssl-images-amazon.com/images/I/51w68M8-8hL._SX295_BO1,204,203,200_.jpg" alt="Card image cap" style="width: 250px; height: 260px" href="#" >
+        <div class="card-body">
+          <h5 class="card-title">{{libro.nombre}}</h5>
+          <p class="card-text">{{libro.anio}}</p>
+          <a href="#" class="btn btn-primary">Comprar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

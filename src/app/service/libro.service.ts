@@ -15,7 +15,7 @@ export class LibroService {
   obtenerTodos(): Observable<Libro[]> {
     return this._httpClient.get<Libro[]>(this.url);
   }
-  obtenerLike(lk: string): Observable<Libro[]>{
-    return this._httpClient.get<Libro[]>(this.url + `/search?nombre=${lk}`);
+  obtenerLike(lk: string): Observable<Libro[]> {
+    return this._httpClient.get<Libro[]>(this.url + `?nombre=${lk}`);
   }
 }

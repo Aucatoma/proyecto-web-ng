@@ -1,0 +1,10 @@
+.full-ht {
+  position: relative;
+  background: lightblue;
+}
+
+
+.mano:hover {
+  cursor: pointer;
+  background: lightgrey;
+}
