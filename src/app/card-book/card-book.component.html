@@ -1,17 +1,21 @@
 <div class="container">
   <div class="row">
-    <div *ngFor="let libro of libros" class="col-4 d-flex justify-content-around align-self-center " href="#" style="padding-top: 50px">
-      <div class="card mx-auto mano" style="width: 18rem;">
-        <img class="card-img-top" src="https://images-na.ssl-images-amazon.com/images/I/51w68M8-8hL._SX295_BO1,204,203,200_.jpg" alt="Card image cap" style="width: 250px; height: 260px" href="#" >
+    <div *ngFor="let libro of libros" class="col-4 d-flex justify-content-around align-self-center " href="#" style="padding-top: 25px; padding-bottom: 25px">
+      <div class="card mx-auto card-shadow card-deck">
+        <img class="card-img-top" src="https://images-na.ssl-images-amazon.com/images/I/51w68M8-8hL._SX295_BO1,204,203,200_.jpg" alt="Cap Book" style="width: 220px; height: 260px" href="#" >
         <div class="card-body">
-          <h5 class="card-title">{{libro.nombre}}</h5>
-          <p class="card-text">{{libro.anio}}</p>
-          <a href="#" class="btn btn-primary">Comprar</a>
+          <h3 class="card-title">{{libro.nombre}}</h3>
+          <p class="card-text">Año: {{libro.anio}}</p>
+          <p class="card-text"><app-rating></app-rating></p>
+          <a href="#" class="btn btn-primary">Comprar: ${{libro.precio}}</a>
+
+
         </div>
       </div>
     </div>
   </div>
 </div>
+
 
 
 

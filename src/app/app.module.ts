@@ -13,6 +13,8 @@ import { MenuComponent } from './menu/menu.component';
 import {LibroService} from './service/libro.service';
 import {BarraBusquedaComponent} from './barra-busqueda/barra-busqueda.component';
 import { CardBookComponent } from './card-book/card-book.component';
+import {StarRatingModule} from 'angular-star-rating';
+import { RatingComponent } from './rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -23,12 +25,14 @@ import { CardBookComponent } from './card-book/card-book.component';
     MenuComponent,
     BarraBusquedaComponent,
     CardBookComponent,
+    RatingComponent,
   ],
   imports: [
     BrowserModule,
     RutasModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    StarRatingModule.forRoot(),
   ],
   providers: [LoginAuthService, LibroService],
   bootstrap: [AppComponent]

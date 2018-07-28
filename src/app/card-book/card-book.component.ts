@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Libro} from '../entidades/libro';
 import {LibroService} from '../service/libro.service';
+
 
 @Component({
   selector: 'app-card-book',
@@ -24,7 +25,6 @@ export class CardBookComponent implements OnInit {
       error1 => {
         console.log(error1);
       }
-    )
+    );
   }
-
 }
