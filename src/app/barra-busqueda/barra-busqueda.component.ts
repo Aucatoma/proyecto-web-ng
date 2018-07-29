@@ -18,7 +18,6 @@ export class BarraBusquedaComponent implements OnInit, AfterViewInit {
   constructor(private _libroService: LibroService) {}
 
   ngOnInit() {
-
     const libros$ = this._libroService.obtenerTodos();
     libros$.subscribe(
       value => {
@@ -27,14 +26,18 @@ export class BarraBusquedaComponent implements OnInit, AfterViewInit {
       error1 => {
         console.log(error1); }
     );
-
   }
-
   ngAfterViewInit(): void {}
   onClickMe() {}
 
   onKey(event: any) {
-    this.obtenerLibros(event.target.value);
+    if (this.filtro === 'Libro') {
+      this.obtenerLibros(event.target.value);
+      if (this.libros.length !== 0) {
+       document.getElementById('dropDownSearchContent').classList.add('show');
+      }
+    } else {
+    }
     this.textoABuscar = event.target.value;
   }
   obtenerLibros(nombre: string) {
@@ -43,8 +46,7 @@ export class BarraBusquedaComponent implements OnInit, AfterViewInit {
       value => {
         this.libros = value;
       },
-      error1 => {
-        console.log(error1); }
+      error1 => { console.log(error1); }
     );
   }
 
@@ -52,18 +54,11 @@ export class BarraBusquedaComponent implements OnInit, AfterViewInit {
     evento.preventDefault();
     this.textoABuscar = nombreLibro;
     this.libros = [];
-  }
-
-  showDropDown() {
-    if (this.textoABuscar !== '') {
-      this.obtenerLibros(this.textoABuscar);
-    } else {
-      document.getElementById('dropDownSearchContent').classList.toggle('show');
-    }
+    document.getElementById('dropDownSearchContent').classList.remove('show');
   }
   changeNameOfDropDownFilter(filtro: string) {
     this.filtro = filtro;
-    console.log('El filtro escogido es: ' + filtro);
+    document.getElementById('dropDownSearchContent').classList.remove('show');
   }
 
 

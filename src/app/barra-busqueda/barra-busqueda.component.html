@@ -12,22 +12,28 @@
       </div>
 
       <div class="dropdown">
-        <input (click)="showDropDown(textoABuscar)" (keyup)="onKey($event)" class="form-control" type="text" placeholder="Search" [value]="textoABuscar" aria-label="Recipient" style="width: 477px">
+        <input (keyup)="onKey($event)" class="form-control" type="text" placeholder="Search" [value]="textoABuscar" aria-label="Recipient" style="width: 477px">
         <div id="dropDownSearchContent" class="dropdown-menu" style="width: 477px" >
-          <ul class="list-group list-group-flush">
+          <ul *ngIf="libros?.length !== 0; else sinResultados" class="list-group list-group-flush">
             <li *ngFor="let libro of libros"
-                (click)="fillSearchBar($event, libro.nombre); showDropDown()"
+                (click)="fillSearchBar($event, libro.nombre)"
                 class="mano
                 list-group-item
                   list-group-item-action
                   d-flex
                   justify-content-between
                   align-items-center"
-            ><a>{{libro.nombre}}</a>
+            >
+              <a>{{libro.nombre}}</a>
               <span class="badge badge-secondary badge-pill">Año: {{libro.anio}}</span>
-
             </li>
           </ul>
+
+          <ng-template #sinResultados class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-center align-items-center">
+              <b>No se hallaron resultados</b>
+            </li>
+          </ng-template>
         </div>
       </div>
 
