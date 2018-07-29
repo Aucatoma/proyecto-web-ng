@@ -15,6 +15,7 @@ import {BarraBusquedaComponent} from './barra-busqueda/barra-busqueda.component'
 import { CardBookComponent } from './card-book/card-book.component';
 import {StarRatingModule} from 'angular-star-rating';
 import { RatingComponent } from './rating/rating.component';
+import { CatalogoComponent } from './catalogo/catalogo.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { RatingComponent } from './rating/rating.component';
     BarraBusquedaComponent,
     CardBookComponent,
     RatingComponent,
+    CatalogoComponent,
   ],
   imports: [
     BrowserModule,
