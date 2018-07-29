@@ -14,23 +14,16 @@ import {LibroService} from '../service/libro.service';
 export class LoginComponent implements OnInit {
 
   error = undefined;
-  libros: Libro[];
+
   constructor(
     private readonly _loginAuthService: LoginAuthService,
     private readonly _credencialesService: CredencialesService,
     private router: Router,
     private _location: Location,
-    private _libroService: LibroService
   ) {
-    //this._location.back();
   }
 
   ngOnInit() {
-    const libros$ = this._libroService.obtenerTodos();
-    libros$.subscribe(value => {
-      this.libros = value;
-      console.log(this.libros);
-    }, error1 => console.log(error1));
   }
 
   login(form) {
@@ -40,8 +33,9 @@ export class LoginComponent implements OnInit {
     const login$ = this._loginAuthService.login(username, contrasenia);
     login$.subscribe(value => {
         this.error = undefined;
-        this._credencialesService.login(value.token);
-      },
+        this._credencialesService.login(value);
+        this.router.navigate(['/catalogo']);
+        },
       error1 => {
         this.error = 'Lo sentimos, intenta de nuevo';
         console.log(error1);

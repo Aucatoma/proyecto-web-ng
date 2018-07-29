@@ -1,0 +1,45 @@
+<form class="form" #f="ngForm" (submit)="emitirUsuario(f)">
+  <div class="form-row justify-content-center">
+    <h2>Datos personales</h2>
+  </div>
+  <div class="form-row justify-content-center">
+    <label class="img-clickable text-center" for="imagen" aria-labelledby="imagenHelpBlock">
+      <img [src]="imagenUsuario" [height]="175" [width]="150" alt="">
+      <input type="file" id="imagen" #imageInput name="imagen" class="no-display" (change)="cambiarFoto(imageInput)" ngModel="" required>
+      <small id="imagenHelpBlock" class="form-text text-muted">Presiona sobre la imagen para subir una foto</small>
+    </label>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-sm-6">
+      <label for="nombre">Nombre</label>
+      <input type="text" class="form-control"  id="nombre" name="nombre" ngModel="">
+    </div>
+    <div class="form-group col-sm-6">
+      <label for="apellido">Apellido</label>
+      <input type="text" class="form-control" id="apellido" name="apellido" ngModel="">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-sm-6">
+      <label for="username">Usuario</label>
+      <input type="text" class="form-control" id="username" name="username" ngModel="">
+    </div>
+    <div class="form-group col-sm-6">
+      <label for="correo">Correo</label>
+      <input type="text" class="form-control" id="correo" name="correo" ngModel="">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-sm-6">
+      <label for="contrasenia">Contraseña</label>
+      <input type="password" class="form-control" id="contrasenia" name="contrasenia" ngModel="">
+    </div>
+    <div class="form-group col-sm-6">
+      <label for="confirmacion">Confirmación de contraseña</label>
+      <input type="password" class="form-control" id="confirmacion" name="confirmacion" ngModel="">
+    </div>
+  </div>
+  <div class="form-row justify-content-center">
+    <button type="submit" class="btn btn-primary">Registrarme</button>
+  </div>
+</form>

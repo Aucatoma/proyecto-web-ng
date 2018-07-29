@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import {Usuario} from '../entidades/usuario';
+import {Credenciales} from '../entidades/credenciales';
+
 
 @Injectable({
   providedIn: 'root'
@@ -6,18 +9,21 @@ import { Injectable } from '@angular/core';
 export class CredencialesService {
 
   estaLogeado = false;
-  jsonwebtoken = '';
+  credenciales: Credenciales;
 
   constructor() { }
 
-  login(jsonwebtoken){
-    this.jsonwebtoken = jsonwebtoken.token;
+  login(credenciales) {
+    console.log(credenciales.jwt);
+    this.credenciales = credenciales;
     this.estaLogeado = true;
+    document.cookie = `jwt=${this.credenciales.jwt}`;
   }
 
-  logout(){
-    this.jsonwebtoken = '';
+  logout() {
+    this.credenciales = undefined;
     this.estaLogeado = false;
+    document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
   }
 
 }

@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <div class="row">
+    <app-menu></app-menu>
+  </div>
+  <!--  <div class="row col-sm-6 align-items-center margin-left">
+      <div class="row justify-content-center">
+        <div class="row">
+          <h1 class="col-sm-12">Registro</h1>
+        </div>
+        <div class="row justify-content-center">
+          <h3 class="col-sm-8 text-justify">Al registrarte puedes acceder a descuentos, promociones y a una gran variedad de contenido exclusivo</h3>
+        </div>
+      </div>
+    </div>-->
+  <div class="row content-registro">
+    <div class="row col-sm-6  align-items-center margin-left">
+      <div class="row justify-content-center">
+        <div class="col-sm-12 text-center">
+          <h1>Registro</h1>
+        </div>
+        <div class="col-sm-8 text-center">
+          <h3 class="text-justify">Al registrarte puedes acceder a descuentos, promociones y a una gran variedad de contenido exclusivo</h3>
+        </div>
+      </div>
+    </div>
+    <app-datos-personales (usuarioEmit)="registro($event)"></app-datos-personales>
+  </div>
+</div>

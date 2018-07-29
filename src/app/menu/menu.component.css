@@ -1,0 +1,9 @@
+.no-padding {
+  padding: 0;
+}
+:host{
+  padding: 0;
+}
+.usuario-data {
+  padding-right: 1ex;
+}

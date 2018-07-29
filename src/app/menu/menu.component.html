@@ -1,3 +1,31 @@
-<p>
-  menu works!
-</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/home" href="#">
+    <img src="assets/icon/icono_app.png" height="50" width="50" alt="">
+    Book sales
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/catalogo" href="#">Catálogo</a>
+      </li>
+    </ul>
+    <ul *ngIf="usuario" class="navbar-nav ml-auto usuario-data">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="{{ usuario.imagenUrl }}" alt="" height="50" width="50" class="img-thumbnail" >
+          {{ usuario.nombre }} {{ usuario.apellido }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Cuenta</a>
+          <a class="dropdown-item" href="#">Carrito de compras</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#" (click)="logout($event)" >Cerrar sesión</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

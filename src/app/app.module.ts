@@ -13,8 +13,13 @@ import { MenuComponent } from './menu/menu.component';
 import {LibroService} from './service/libro.service';
 import {BarraBusquedaComponent} from './barra-busqueda/barra-busqueda.component';
 import { CardBookComponent } from './card-book/card-book.component';
-import {StarRatingModule} from 'angular-star-rating';
+import {CredencialesService} from './credenciales/credenciales.service';
 import { RatingComponent } from './rating/rating.component';
+import { RegistroComponent } from './registro/registro.component';
+import {UsuarioService} from './service/usuario.service';
+import { DatosPersonalesComponent } from './datos-personales/datos-personales.component';
+import { DatosTarjetaComponent } from './datos-tarjeta/datos-tarjeta.component';
+
 import { CatalogoComponent } from './catalogo/catalogo.component';
 
 @NgModule({
@@ -27,6 +32,9 @@ import { CatalogoComponent } from './catalogo/catalogo.component';
     BarraBusquedaComponent,
     CardBookComponent,
     RatingComponent,
+    RegistroComponent,
+    DatosPersonalesComponent,
+    DatosTarjetaComponent,
     CatalogoComponent,
   ],
   imports: [
@@ -34,9 +42,9 @@ import { CatalogoComponent } from './catalogo/catalogo.component';
     RutasModule,
     HttpClientModule,
     FormsModule,
-    StarRatingModule.forRoot(),
   ],
   providers: [LoginAuthService, LibroService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {CredencialesService} from '../credenciales/credenciales.service';
 import {Observable} from 'rxjs';
-import {Jwt} from '../entidades/token';
+import {Jwt} from '../entidades/jwt';
+import {Credenciales} from '../entidades/credenciales';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class LoginAuthService {
     private httpClient: HttpClient
   ) {}
 
-  login(username: string, constrasenia: string): Observable<Jwt> {
+  login(username: string, constrasenia: string): Observable<Credenciales> {
     const body = `{"username": "${username}", "contrasenia":"${constrasenia}"}`;
     const httpOptions = {
       headers: new HttpHeaders({
@@ -23,6 +24,6 @@ export class LoginAuthService {
       })
     };
 
-    return this.httpClient.post<Jwt>(this.url, body, httpOptions);
+    return this.httpClient.post<Credenciales>(this.url, body, httpOptions);
   }
 }
