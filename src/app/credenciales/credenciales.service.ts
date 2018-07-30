@@ -14,8 +14,8 @@ export class CredencialesService {
   constructor() { }
 
   login(credenciales) {
-    console.log(credenciales.jwt);
     this.credenciales = credenciales;
+    //console.log(this.credenciales.usuario.apellido);
     this.estaLogeado = true;
     document.cookie = `jwt=${this.credenciales.jwt}`;
   }

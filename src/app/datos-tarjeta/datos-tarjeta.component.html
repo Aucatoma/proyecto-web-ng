@@ -1,36 +1,41 @@
-
+<form class="form" #f="ngForm" (submit)="emitirTarjeta(f)">
   <div class="form-row">
     <div class="form-group-col-sm-3">
       <label for="tipo_tar">Tipo de tarjeta</label>
-      <select name="tipo_tar" id="tipo_tar" class="form-control" (change)="imprimir(this)">
-        <option *ngFor="let tarjeta of tarjetas" value="tarjeta">
-          {{ tarjeta }}
+      <select name="tipo_tar" id="tipo_tar" class="form-control" (change)="cambiarIcono($event)" ngModelGroup="">
+        <option *ngFor="let tipo of tipos" value="{{ tipo }}" [attr.selected]="tarjeta.tipo == tipo ? '': null">
+          {{ tipo }}
         </option>
       </select>
     </div>
     <div class="form-group col-sm-5">
       <label for="num_tarjeta">Número de tarjeta</label>
-      <input type="text"  class="form-control" id="num_tarjeta"  name="num_tarjeta" ngModel="" required>
+      <input type="text"  class="form-control" id="num_tarjeta"  name="num_tarjeta" ngModel="{{ tarjeta.numero }}" required>
     </div>
     <div class="col-sm-2 align-self-center text-center">
-      <img [src]="'assets/icon/mastercard.png'" height="40"  width="55" alt="">
+      <img [src]="icono" height="40"  width="55" alt="">
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-sm-6">
       <label for="cod_tar">Código de seguridad</label>
-      <input type="text" class="form-control" id="cod_tar" name="cod_tar" required>
+      <input type="text" class="form-control" id="cod_tar" name="cod_tar" ngModel="{{tarjeta.codigo}}" required>
     </div>
     <div class="form-group col-sm-3">
       <label for="mes_tar">Mes</label>
-      <select name="mes_tar" id="mes_tar" class="custom-select">
-        <option *ngFor="let mes of meses" [value]="mes">{{mes}}</option>
+      <select name="mes_tar" id="mes_tar" class="custom-select" ngModelGroup="">
+        <option *ngFor="let mes of meses" [attr.selected]="( mes * 1) === tarjeta.mes ? '' : null" [value]="mes"> {{mes}}</option>
       </select>
     </div>
     <div class="form-group col-sm-3">
       <label for="anio_tar">Año</label>
-      <select name="anio_tar" id="anio_tar" class="custom-select">
-        <option *ngFor="let anio of anios" [value]="anio">{{anio}}</option>
+      <select name="anio_tar" id="anio_tar" class="custom-select" ngModelGroup="">
+        <option *ngFor="let anio of anios" [value]="anio" [attr.selected]="(anio*1) === tarjeta.anio ? '' : null">{{anio}}</option>
       </select>
     </div>
   </div>
+  <div class="form-row justify-content-center">
+    <button *ngIf="tarjeta.id != 0" type="submit" class="btn btn-primary">Actualizar</button>
+    <button *ngIf="tarjeta.id == 0" type="submit" class="btn btn-primary">Añadir</button>
+  </div>
+</form>

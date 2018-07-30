@@ -1,32 +1,41 @@
-import {Component, EventEmitter, HostBinding, OnInit, Output} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {Component, DoCheck, EventEmitter, HostBinding, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {UsuarioEdicion} from '../entidades/usuario-edicion';
+import {Usuario} from '../entidades/usuario';
 
 @Component({
   selector: 'app-datos-personales',
   templateUrl: './datos-personales.component.html',
   styleUrls: ['./datos-personales.component.css']
 })
-export class DatosPersonalesComponent implements OnInit {
+export class DatosPersonalesComponent implements OnInit, DoCheck {
 
 
-  @HostBinding('attr.class') clase = 'col-sm-6';
+  @Input() usuario: Usuario;
   @Output() usuarioEmit = new EventEmitter<UsuarioEdicion>();
+  @HostBinding('attr.class') clase = 'col-sm-6';
 
   imagenUsuario = 'assets/images/img_no_usuario.png';
   reader = new FileReader();
+  usuarioForm: Usuario;
 
   constructor() {
     this.reader.onload = () => {
       this.imagenUsuario = this.reader.result;
       console.log(this.imagenUsuario);
     };
+
+  }
+
+  ngDoCheck(): void {
   }
 
   ngOnInit() {
+    console.log(this.usuario);
   }
 
   emitirUsuario(form) {
+    console.log(form);
+    /*
     const nombre = form.controls.nombre.value;
     const apellido = form.controls.apellido.value;
     const username = form.controls.username.value;
@@ -45,7 +54,9 @@ export class DatosPersonalesComponent implements OnInit {
       extension,
     };
 
-    this.usuarioEmit.emit(usuario);
+    console.log(form);
+    //this.usuarioEmit.emit(usuario);
+  */
   }
 
   cambiarFoto(imageInput) {

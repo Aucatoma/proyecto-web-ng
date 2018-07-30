@@ -21,6 +21,9 @@ import { DatosPersonalesComponent } from './datos-personales/datos-personales.co
 import { DatosTarjetaComponent } from './datos-tarjeta/datos-tarjeta.component';
 
 import { CatalogoComponent } from './catalogo/catalogo.component';
+import { CuentaComponent } from './cuenta/cuenta.component';
+import { TablaTarjetaComponent } from './tabla-tarjeta/tabla-tarjeta.component';
+import { MesPipe } from './pipe/mes.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import { CatalogoComponent } from './catalogo/catalogo.component';
     DatosPersonalesComponent,
     DatosTarjetaComponent,
     CatalogoComponent,
+    CuentaComponent,
+    TablaTarjetaComponent,
+    MesPipe,
   ],
   imports: [
     BrowserModule,
@@ -43,7 +49,7 @@ import { CatalogoComponent } from './catalogo/catalogo.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [LoginAuthService, LibroService],
+  providers: [LoginAuthService, LibroService, CredencialesService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

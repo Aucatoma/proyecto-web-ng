@@ -1,0 +1,33 @@
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Tipo</th>
+    <th scope="col">Número</th>
+    <th scope="col">CVV</th>
+    <th scope="col">Fecha de vencimiento</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let tarjeta of tarjetas; let indice = index;" (click)="emitirTarjeta(tarjeta)" class="trow-clickable">
+    <th scope="row">{{ current + indice + 1 }}</th>
+    <td>{{tarjeta.tipo}}</td>
+    <td>{{tarjeta.numero}}</td>
+    <td>{{tarjeta.codigo}}</td>
+    <td>{{tarjeta.mes | mes}}/{{tarjeta.anio}}</td>
+  </tr>
+  </tbody>
+</table>
+<nav aria-label="..." class="row justify-content-center">
+  <ul class="pagination pagination-sm">
+    <li class="page-item" [id]="'prev'">
+      <a class="page-link"  href="#" tabindex="-1" (click)="tomarAnteriores($event)">Previous</a>
+    </li>
+    <li #li *ngFor="let i of indicePaginacion" class="page-item"  [id]="i">
+      <a class="page-link" href="#" (click)="tomarPorIndice(i, $event, li)">{{ i }}</a>
+    </li>
+    <li class="page-item" [id]="'next'">
+      <a class="page-link"  href="#" tabindex="+1" (click)="tomarSiguientes($event)">Next</a>
+    </li>
+  </ul>
+</nav>

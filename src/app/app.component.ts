@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import {CredencialesService} from './credenciales/credenciales.service';
 import {UsuarioService} from './service/usuario.service';
-import {Credenciales} from './entidades/credenciales';
-import {subscribeToArray} from 'rxjs/internal/util/subscribeToArray';
-import {Usuario} from './entidades/usuario';
-import {Jwt} from './entidades/jwt';
+
 
 @Component({
   selector: 'app-root',
@@ -20,19 +17,23 @@ export class AppComponent {
     private readonly usuarioService: UsuarioService
   ) {
     const jwt = this.getCookie('jwt');
-    const usuario$ = this.usuarioService.obtenerUsuario(jwt);
 
-    usuario$.subscribe(value => {
-      const usuarioRecv = value;
-      const jwtoken =  {
-        token: jwt,
-      };
-      const credenciales = {
-        usuario: value,
-        jwt: jwtoken
-      };
-      this.credencialesService.login(credenciales);
-    }, error1 => console.log(error1));
+    if (jwt !== '') {
+
+      const usuario$ = this.usuarioService.obtenerUsuario(jwt);
+
+      usuario$.subscribe(value => {
+        const jwtoken = jwt;
+        const credenciales = {
+          usuario: value,
+          jwt: jwtoken
+        };
+        this.credencialesService.login(credenciales);
+      }, error1 => {
+        this.credencialesService.logout();
+        console.log(error1);
+      });
+    }
   }
 
   getCookie(cname) {

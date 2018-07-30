@@ -7,3 +7,23 @@
 .usuario-data {
   padding-right: 1ex;
 }
+
+
+*{
+  color: white;
+}
+.navbar {
+  background: #000011;
+}
+
+.nav-item {
+  font-size: 2ex;
+}
+
+.dropdown-item{
+  background: white;
+  color: black;
+}
+.dropdown-item:hover {
+  background: #d4d4d4;
+}

@@ -18,7 +18,7 @@ export class MenuComponent implements OnInit, DoCheck {
     private _router: Router
   )
   {
-    if(this._credencialesService.estaLogeado) {
+    if (this._credencialesService.estaLogeado) {
       this.usuario = this._credencialesService.credenciales.usuario;
     }
   }
