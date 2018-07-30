@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 declare var $;
 
 @Component({
@@ -6,15 +6,17 @@ declare var $;
   templateUrl: './rating.component.html',
   styleUrls: ['./rating.component.css']
 })
-export class RatingComponent implements OnInit, AfterViewInit {
+export class RatingComponent implements OnInit {
+  @Input() puntuacion;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
-  }
-  ngAfterViewInit(): void {
+    $('.ui.rating').rating({
+      initialRating: this.puntuacion,
+      maxRating: 5,
+    });
     $('.ui.rating').rating('disable');
   }
-
-
 }

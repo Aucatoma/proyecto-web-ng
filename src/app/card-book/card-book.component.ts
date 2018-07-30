@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Libro} from '../entidades/libro';
 import {LibroService} from '../service/libro.service';
 
@@ -9,12 +9,17 @@ import {LibroService} from '../service/libro.service';
   styleUrls: ['./card-book.component.css']
 })
 export class CardBookComponent implements OnInit {
+  @Input() libro: Libro;
+  @Output() libroEmit = new EventEmitter<Libro>();
   libros: Libro[];
 
   constructor(private _libroService: LibroService) { }
 
   ngOnInit() {
     this.searchOneBook();
+  }
+  emitirLibro() {
+    this.libroEmit.emit(this.libro);
   }
   searchOneBook() {
     const libros$ = this._libroService.obtenerTodos();

@@ -14,6 +14,8 @@ const rutas: Routes = [
   { path: 'registro', component: RegistroComponent },
   { path: 'catalogo', component: CatalogoComponent },
   { path: 'cuenta', component: CuentaComponent}
+  { path: 'catalogo', component: CatalogoComponent },
+  { path: 'detalle/:id', component: Detall}
 ];
 
 @NgModule({

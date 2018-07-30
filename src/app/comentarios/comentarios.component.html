@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-6" style="overflow: scroll">
+    <div class="ui comments" style="width: 100%">
+      <div *ngFor="let comentario of comentarios" class="comment">
+
+        <a class="avatar">
+          <img src="http://3.bp.blogspot.com/-DTk2MXZ6tSo/UAVKQlDXxKI/AAAAAAAAAx0/gHd4P0WexwM/s1600/hablaocalla.jpg" alt="">
+        </a>
+
+        <div class="content">
+
+          <a class="author">Max</a>
+
+          <div class="metadata">
+            <span class="date">{{comentario.fecha}}</span>
+          </div>
+
+          <div class="text">{{comentario.comentario}}</div>
+          <div class="actions">
+            <app-rating [puntuacion]="comentario.puntuacionLibro"></app-rating>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-6">
+    <form class="ui reply form">
+      <div class="field">
+        <textarea></textarea>
+      </div>
+      <div class="ui blue labeled submit icon button">
+        <i class="icon edit"></i> Comentar
+      </div>
+    </form>
+  </div>
+</div>
+

@@ -24,6 +24,9 @@ import { CatalogoComponent } from './catalogo/catalogo.component';
 import { CuentaComponent } from './cuenta/cuenta.component';
 import { TablaTarjetaComponent } from './tabla-tarjeta/tabla-tarjeta.component';
 import { MesPipe } from './pipe/mes.pipe';
+import { DetalleLibroComponent } from './detalle-libro/detalle-libro.component';
+import { ComentariosComponent } from './comentarios/comentarios.component';
+import { DetalleComponent } from './detalle/detalle.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { MesPipe } from './pipe/mes.pipe';
     CuentaComponent,
     TablaTarjetaComponent,
     MesPipe,
+    DetalleLibroComponent,
+    ComentariosComponent,
+    DetalleComponent,
   ],
   imports: [
     BrowserModule,

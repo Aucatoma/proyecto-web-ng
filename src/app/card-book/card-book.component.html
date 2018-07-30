@@ -1,6 +1,6 @@
-<div class="container">
+<div (click)="emitirLibro()" class="container card-clickable">
   <div class="row">
-    <div *ngFor="let libro of libros" class="col-4 d-flex justify-content-around align-self-center " href="#" style="padding-top: 25px; padding-bottom: 25px">
+    <div class="col-3 d-flex justify-content-around align-self-center " href="#" style="padding-top: 25px; padding-bottom: 25px">
       <div class="card mx-auto card-shadow card-deck">
         <img class="card-img-top" src="https://images-na.ssl-images-amazon.com/images/I/51w68M8-8hL._SX295_BO1,204,203,200_.jpg" alt="Cap Book" style="width: 220px; height: 260px" href="#" >
         <div class="card-body">
@@ -8,8 +8,6 @@
           <p class="card-text">Año: {{libro.anio}}</p>
           <p class="card-text"><app-rating></app-rating></p>
           <a href="#" class="btn btn-primary">Comprar: ${{libro.precio}}</a>
-
-
         </div>
       </div>
     </div>
