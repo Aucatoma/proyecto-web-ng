@@ -18,4 +18,9 @@ export class LibroService {
   obtenerLike(lk: string): Observable<Libro[]> {
     return this._httpClient.get<Libro[]>(this.url + `?nombre=${lk}`);
   }
+
+  obtenerUno(id: string): Observable<Libro> {
+    return this._httpClient.get<Libro>(`${this.url}/${id}`);
+  }
 }
+

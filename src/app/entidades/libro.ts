@@ -5,5 +5,8 @@ export interface Libro {
   numeroPaginas: number;
   descripcion: string;
   precio: number;
+  autorId: number;
+  editorialId: number;
+  generoId: number;
   imagenUrl: string;
 }

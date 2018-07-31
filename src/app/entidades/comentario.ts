@@ -3,5 +3,7 @@ export interface Comentario {
   fecha: string;
   comentario: string;
   puntuacionLibro: number;
+  libroId: number;
+  autorId: number;
 }
 

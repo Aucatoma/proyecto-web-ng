@@ -1,13 +1,11 @@
-<div class="container-fluid" style="padding-top: 50px">
-  <div class="row justify-content-center" style="margin-bottom: 0px">
-    <div class="col-6 input-group mb-3">
+
       <div class="input-group-prepend">
         <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{filtro}}</button>
         <div class="dropdown-menu">
-          <a (click)="changeNameOfDropDownFilter('Genero')" class="dropdown-item mano">Genero</a>
-          <a (click)="changeNameOfDropDownFilter('Editorial')" class="dropdown-item mano">Editorial</a>
-          <a (click)="changeNameOfDropDownFilter('Autor')" class="dropdown-item mano">Autor</a>
-          <a (click)="changeNameOfDropDownFilter('Libro')" class="dropdown-item mano">Libro</a>
+          <a (click)="changeNameOfDropDownFilter('Genero', $event)" class="dropdown-item mano">Genero</a>
+          <a (click)="changeNameOfDropDownFilter('Editorial', $event)" class="dropdown-item mano">Editorial</a>
+          <a (click)="changeNameOfDropDownFilter('Autor', $event)" class="dropdown-item mano">Autor</a>
+          <a (click)="changeNameOfDropDownFilter('Libro', $event)" class="dropdown-item mano">Libro</a>
         </div>
       </div>
 
@@ -38,13 +36,8 @@
       </div>
 
       <div class="input-group-append">
-        <button (click)="onClickMe()" class="btn btn-outline-secondary" type="button">Buscar</button>
+        <button (click)="emitirTexto()" class="btn btn-outline-secondary" type="button">Buscar</button>
       </div>
-
-    </div>
-  </div>
-
-</div>
 
 
 

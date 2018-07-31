@@ -1,5 +1,10 @@
 <div class="row">
   <app-menu></app-menu>
 </div>
-<app-barra-busqueda></app-barra-busqueda>
-<app-card-book (libroEmit)="irADetalle($event)"></app-card-book>
+<div class="row justify-content-center">
+  <app-barra-busqueda (textoEmit)="buscarLibros($event)"></app-barra-busqueda>
+</div>
+<div class="row">
+  <app-card-book (libroEmit)="irADetalle($event)" *ngFor="let libro of libros" [libro]="libro"></app-card-book>
+</div>
+

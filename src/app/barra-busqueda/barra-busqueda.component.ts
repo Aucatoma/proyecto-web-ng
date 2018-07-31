@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, HostBinding, OnInit, Output} from '@angular/core';
 import {Libro} from '../entidades/libro';
 import {LibroService} from '../service/libro.service';
 declare var $;
@@ -15,6 +15,8 @@ export class BarraBusquedaComponent implements OnInit, AfterViewInit {
   textoABuscar = '';
   filtro = 'Libro';
 
+  @Output() textoEmit = new EventEmitter();
+  @HostBinding('attr.class') clase = 'col-sm-8 input-group mb-3 text-center';
   constructor(private _libroService: LibroService) {}
 
   ngOnInit() {
@@ -28,7 +30,10 @@ export class BarraBusquedaComponent implements OnInit, AfterViewInit {
     );
   }
   ngAfterViewInit(): void {}
-  onClickMe() {}
+
+  emitirTexto() {
+    this.textoEmit.emit({filtro: this.filtro, texto: this.textoABuscar});
+  }
 
   onKey(event: any) {
     if (this.filtro === 'Libro') {
@@ -56,7 +61,8 @@ export class BarraBusquedaComponent implements OnInit, AfterViewInit {
     this.libros = [];
     document.getElementById('dropDownSearchContent').classList.remove('show');
   }
-  changeNameOfDropDownFilter(filtro: string) {
+  changeNameOfDropDownFilter(filtro: string, evento) {
+    evento.preventDefault();
     this.filtro = filtro;
     document.getElementById('dropDownSearchContent').classList.remove('show');
   }

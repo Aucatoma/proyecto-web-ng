@@ -27,6 +27,10 @@ import { MesPipe } from './pipe/mes.pipe';
 import { DetalleLibroComponent } from './detalle-libro/detalle-libro.component';
 import { ComentariosComponent } from './comentarios/comentarios.component';
 import { DetalleComponent } from './detalle/detalle.component';
+import {AutorService} from './service/autor.service';
+import {GeneroService} from './service/genero.service';
+import {EditorialService} from './service/editorial.service';
+import {ComentarioService} from './service/comentario.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,15 @@ import { DetalleComponent } from './detalle/detalle.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [LoginAuthService, LibroService, CredencialesService],
+  providers: [
+    LoginAuthService,
+    LibroService,
+    CredencialesService,
+    AutorService,
+    GeneroService,
+    EditorialService,
+    ComentarioService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

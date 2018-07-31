@@ -6,6 +6,7 @@ import {HomeComponent} from '../home/home.component';
 import {RegistroComponent} from '../registro/registro.component';
 import {CatalogoComponent} from '../catalogo/catalogo.component';
 import {CuentaComponent} from '../cuenta/cuenta.component';
+import {DetalleComponent} from '../detalle/detalle.component';
 
 const rutas: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -13,9 +14,9 @@ const rutas: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'catalogo', component: CatalogoComponent },
-  { path: 'cuenta', component: CuentaComponent}
+  { path: 'cuenta', component: CuentaComponent},
   { path: 'catalogo', component: CatalogoComponent },
-  { path: 'detalle/:id', component: Detall}
+  { path: 'detalle/:id', component: DetalleComponent}
 ];
 
 @NgModule({

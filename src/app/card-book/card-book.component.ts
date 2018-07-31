@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, HostBinding, Input, OnInit, Output} from '@angular/core';
 import {Libro} from '../entidades/libro';
 import {LibroService} from '../service/libro.service';
 
@@ -11,6 +11,7 @@ import {LibroService} from '../service/libro.service';
 export class CardBookComponent implements OnInit {
   @Input() libro: Libro;
   @Output() libroEmit = new EventEmitter<Libro>();
+  @HostBinding('attr.class') clase = 'col-sm-3';
   libros: Libro[];
 
   constructor(private _libroService: LibroService) { }
