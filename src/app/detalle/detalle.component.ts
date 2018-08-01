@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Libro} from '../entidades/libro';
 import {LibroService} from '../service/libro.service';
@@ -17,7 +17,7 @@ import {ComentarioService} from '../service/comentario.service';
   templateUrl: './detalle.component.html',
   styleUrls: ['./detalle.component.css']
 })
-export class DetalleComponent implements OnInit {
+export class DetalleComponent implements OnInit, AfterViewInit {
 
   libro: Libro;
   genero: Genero;
@@ -35,9 +35,8 @@ export class DetalleComponent implements OnInit {
     private location: Location
   ) { }
 
-  ngOnInit() {
-    this.obtenerLibro();
-  }
+  ngOnInit() { this.obtenerLibro(); }
+  ngAfterViewInit(): void { }
 
   obtenerLibro() {
     const id = +this._route.snapshot.paramMap.get('id');
@@ -51,7 +50,7 @@ export class DetalleComponent implements OnInit {
       this.obtenerComentarios(this.libro.id + '');
     }, error1 => console.log(error1));
   }
-  obtenerAutor(id: string){
+  obtenerAutor(id: string) {
     const autor$ = this._autorService.obtenerPorLibroId(id);
     autor$.subscribe(value => {
       this.autor = value;
@@ -77,7 +76,24 @@ export class DetalleComponent implements OnInit {
     comentarios$.subscribe(value => {
       this.comentarios = value;
       console.log(this.comentarios);
+      this.obtenerPuntuacionDeLibro();
     }, error1 => console.log(error1));
   }
-
+  insertarComentario(comentario: Comentario) {
+    const comentario$ = this._comentarioService.insertarComentario(comentario);
+    comentario$.subscribe(
+      value => {
+        console.log('COMENTARIO INSERTADO: ' + value);
+      },
+        error1 => {
+        console.log(error1);
+      });
+  }
+  obtenerPuntuacionDeLibro() {
+    let total = 0;
+    for (const comentario of this.comentarios) {
+      total = comentario.puntuacionLibro + total;
+    }
+    this.libro.puntuacion = Math.round(total / this.comentarios.length);
+  }
 }

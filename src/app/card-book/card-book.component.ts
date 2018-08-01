@@ -12,25 +12,12 @@ export class CardBookComponent implements OnInit {
   @Input() libro: Libro;
   @Output() libroEmit = new EventEmitter<Libro>();
   @HostBinding('attr.class') clase = 'col-sm-3';
-  libros: Libro[];
 
   constructor(private _libroService: LibroService) { }
 
   ngOnInit() {
-    this.searchOneBook();
   }
   emitirLibro() {
     this.libroEmit.emit(this.libro);
-  }
-  searchOneBook() {
-    const libros$ = this._libroService.obtenerTodos();
-    libros$.subscribe(
-      value => {
-        this.libros = value;
-      },
-      error1 => {
-        console.log(error1);
-      }
-    );
   }
 }

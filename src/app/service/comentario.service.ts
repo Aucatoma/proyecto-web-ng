@@ -17,4 +17,7 @@ export class ComentarioService {
   obtenerPorLibroId(id: string): Observable<Comentario[]> {
     return this._httpClient.get<Comentario[]>(`${this.url}/libro/${id}`);
   }
+  insertarComentario(comentario: Comentario): Observable<Comentario> {
+    return this._httpClient.post<Comentario>(`${this.url}`, comentario);
+  }
 }
