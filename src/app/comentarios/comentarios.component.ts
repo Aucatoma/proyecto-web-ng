@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Comentario} from '../entidades/comentario';
 import {ComentarioService} from '../service/comentario.service';
+import {Libro} from '../entidades/libro';
+import {Usuario} from '../entidades/usuario';
 
 @Component({
   selector: 'app-comentarios',
@@ -8,23 +10,22 @@ import {ComentarioService} from '../service/comentario.service';
   styleUrls: ['./comentarios.component.css']
 })
 export class ComentariosComponent implements OnInit {
-  comentarios: Comentario[];
-
+  @Input() comentarios: Comentario[];
+  @Input() libro: Libro;
+  @Input() usuario: Usuario;
+  @Output() textoComentarioEmit = new EventEmitter<string>();
+  textoComentario = '';
   constructor(private _comentarioService: ComentarioService) { }
 
-  ngOnInit() {
-    this.searchComentaries();
+  ngOnInit() { }
+
+  comentar(form) {
+     this.textoComentario = form.controls.textoComentario.value;
+     this.emitirComentario();
   }
-  searchComentaries() {
-    const comentarios$ = this._comentarioService.obtenerTodos();
-    comentarios$.subscribe(
-      value => {
-        this.comentarios = value;
-      },
-      error1 => {
-        console.log(error1);
-      }
-    );
+  emitirComentario() {
+    this.textoComentarioEmit.emit(this.textoComentario);
   }
+
 
 }

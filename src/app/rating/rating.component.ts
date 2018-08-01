@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 declare var $;
 
 @Component({
@@ -6,17 +6,25 @@ declare var $;
   templateUrl: './rating.component.html',
   styleUrls: ['./rating.component.css']
 })
-export class RatingComponent implements OnInit {
+export class RatingComponent implements OnInit, AfterViewInit {
   @Input() puntuacion;
+  @Output() puntuacionUsuarioEmit = new EventEmitter<number>();
+  puntuacionUsuario;
+  constructor() { }
 
-  constructor() {
-  }
-
-  ngOnInit() {
+  ngOnInit() { }
+  ngAfterViewInit(): void {
     $('.ui.rating').rating({
-      initialRating: this.puntuacion,
       maxRating: 5,
     });
-    $('.ui.rating').rating('disable');
+    $('.ui.rating').rating('enable');
+  }
+  emitirPuntuacion(event: any) {
+    event.preventDefault();
+    $('.ui.rating').rating('setting', 'onRate', (value) => {
+      this.puntuacionUsuario = value;
+      console.log('MI PUNTUACION ES: ' + this.puntuacionUsuario);
+      this.puntuacionUsuarioEmit.emit(this.puntuacionUsuario);
+    });
   }
 }

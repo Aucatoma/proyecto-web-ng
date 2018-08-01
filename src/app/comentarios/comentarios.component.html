@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-6" style="overflow: scroll">
-    <div class="ui comments" style="width: 100%">
+  <div class="col-6" style="pointer-events: none">
+    <div *ngIf="comentarios?.length != 0; else sinComentarios" class="ui comments" style="width: 100%">
       <div *ngFor="let comentario of comentarios" class="comment">
 
         <a class="avatar">
@@ -12,26 +12,31 @@
           <a class="author">Max</a>
 
           <div class="metadata">
-            <span class="date">{{comentario.fecha}}</span>
+            <span class="date">{{comentario?.fecha}}</span>
           </div>
 
-          <div class="text">{{comentario.comentario}}</div>
+          <div class="text">{{comentario?.comentario}}</div>
           <div class="actions">
-            <app-rating [puntuacion]="comentario.puntuacionLibro"></app-rating>
+            <app-rating [puntuacion]="comentario?.puntuacionLibro"></app-rating>
           </div>
         </div>
       </div>
     </div>
 
+    <ng-template #sinComentarios>
+      <h5> No hay comentarios </h5>
+
+    </ng-template>
+
   </div>
   <div class="col-6">
-    <form class="ui reply form">
-      <div class="field">
-        <textarea></textarea>
+    <form #form="ngForm" (submit)="comentar(form)" class="ui reply form" novalidate>
+      <div class="field form-group">
+        <textarea id="textoComentario" placeholder="Ingrese su comentario" name="textoComentario" ngModel=""></textarea>
       </div>
-      <div class="ui blue labeled submit icon button">
+      <button (click)="emitirComentario(); $event.stopPropagation()" class="ui blue labeled submit icon button">
         <i class="icon edit"></i> Comentar
-      </div>
+      </button>
     </form>
   </div>
 </div>
