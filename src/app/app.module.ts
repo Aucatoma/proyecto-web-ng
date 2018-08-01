@@ -31,7 +31,8 @@ import {AutorService} from './service/autor.service';
 import {GeneroService} from './service/genero.service';
 import {EditorialService} from './service/editorial.service';
 import {ComentarioService} from './service/comentario.service';
-//import { SpeechTextComponent } from './speech-text/speech-text.component';
+import {SpeechTextService} from './service/speech-text.service';
+import {SpeechTextComponent} from './speech-text/speech-text.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import {ComentarioService} from './service/comentario.service';
     DetalleLibroComponent,
     ComentariosComponent,
     DetalleComponent,
-    //SpeechTextComponent,
+    SpeechTextComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +69,8 @@ import {ComentarioService} from './service/comentario.service';
     AutorService,
     GeneroService,
     EditorialService,
-    ComentarioService
+    ComentarioService,
+    SpeechTextService
   ],
   bootstrap: [AppComponent]
 })
