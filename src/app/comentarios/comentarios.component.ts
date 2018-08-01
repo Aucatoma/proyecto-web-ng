@@ -13,6 +13,7 @@ export class ComentariosComponent implements OnInit {
   @Input() comentarios: Comentario[];
   @Input() libro: Libro;
   @Input() usuario: Usuario;
+  @Input() erroAlComentar = undefined;
   @Output() textoComentarioEmit = new EventEmitter<string>();
   textoComentario = '';
   constructor(private _comentarioService: ComentarioService) { }

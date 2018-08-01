@@ -6,7 +6,9 @@ import {Genero} from '../entidades/genero';
 import {Autor} from '../entidades/autor';
 import {ComentarioService} from '../service/comentario.service';
 import {delay} from 'q';
-
+import {CredencialesService} from '../credenciales/credenciales.service';
+import {ErrorHandlerService} from '../service/error-handler.service';
+declare var $;
 @Component({
   selector: 'app-detalle-libro',
   templateUrl: './detalle-libro.component.html',
@@ -24,9 +26,11 @@ export class DetalleLibroComponent implements OnInit {
   comentarioUsuario = '';
   nuevoComentario = new Comentario();
   contador = 0;
+  error = undefined;
 
-
-  constructor(private _comentarioService: ComentarioService) {}
+  constructor(
+    private _comentarioService: ComentarioService,
+    private _errorHandlerService: ErrorHandlerService) {}
 
   ngOnInit() {
 
@@ -54,7 +58,12 @@ export class DetalleLibroComponent implements OnInit {
       value => {
         console.log('COMENTARIO INSERTADO: ' + JSON.stringify(value));
       },
-      error1 => {console.log('PILAS HAY UN ERROR: ' + error1); }
+      error1 => {
+        console.log(this._errorHandlerService.handleError(error1));
+       if (this._errorHandlerService.handleError(error1) === 'No está autorizado') {
+         this.error = 'Por favor, inicie sesión o regístrese para comentar esta publicación';
+       }
+       console.log(error1); }
     );
   }
 
