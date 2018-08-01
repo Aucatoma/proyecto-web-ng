@@ -11,8 +11,8 @@
     <form class="col-sm-6" #f="ngForm" (submit)="login(f)" novalidate>
       <div class="form-row form-group">
         <label for="username">Usuario</label>
-        <input type="text" id="username" class="form-control" placeholder="Ingresa tu nombre de usuario" name="username" ngModel="" required>
-        <app-speech-text class="col-sm-1"></app-speech-text>
+        <input type="text" id="username" class="form-control" placeholder="Ingresa tu nombre de usuario" name="username" ngModel="{{ texto }}" required>
+        <app-speech-text class="col-sm-1" (textoEmit)="colocarTexto($event)"></app-speech-text>
       </div>
       <div class="form-row form-group">
         <label for="contrasenia">Contraseña</label>

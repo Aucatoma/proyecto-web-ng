@@ -3,8 +3,6 @@ import {LoginAuthService} from '../authorization/login-auth.service';
 import {Router} from '@angular/router';
 import {CredencialesService} from '../credenciales/credenciales.service';
 import {Location} from '@angular/common';
-import {Libro} from '../entidades/libro';
-import {LibroService} from '../service/libro.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +12,7 @@ import {LibroService} from '../service/libro.service';
 export class LoginComponent implements OnInit {
 
   error = undefined;
+  texto = '';
 
   constructor(
     private readonly _loginAuthService: LoginAuthService,
@@ -40,5 +39,8 @@ export class LoginComponent implements OnInit {
         this.error = 'Lo sentimos, intenta de nuevo';
         console.log(error1);
       });
+  }
+  colocarTexto(texto) {
+    document.getElementById('username').value = texto;
   }
 }
