@@ -6,7 +6,7 @@
             <div class="row">
               <div class="col-4 text-center" style="padding-left: 115px">
                 <div class="card" style="width: 220px">
-                  <img class="card-img-top" src="https://images-na.ssl-images-amazon.com/images/I/51w68M8-8hL._SX295_BO1,204,203,200_.jpg" alt="Cap Book" style="width: 220px; height: 280px" href="#">
+                  <img class="card-img-top" [src]="libro?.imagenUrl" [alt]="libro?.nombre" style="width: 220px; height: 280px" href="#">
                   <div class="card-body deshabilitarPointer">
                     <p class="card-text"><app-rating [puntuacion]="libro?.puntuacion"></app-rating></p>
                   </div>
@@ -19,11 +19,11 @@
                   <div class="card-body">
                     <div class="row justify-content-center">
                       <div class="col-7 text-center">
-                        <p class="card-text">{{autor?.nombre}}</p>
+                        <p class="card-text">{{autor?.nombre}} {{autor?.apellido}}</p>
                         <p class="card-text">{{genero?.nombre}}</p>
                         <p class="card-text">{{libro?.descripcion}}</p>
                         <p class="card-text">{{editorial?.nombre}}</p>
-                        <p class="card-text">{{libro?.numeroPaginas}}</p>
+                        <p class="card-text">{{libro?.numeroPaginas}} páginas</p>
                       </div>
                     </div>
                   </div>
