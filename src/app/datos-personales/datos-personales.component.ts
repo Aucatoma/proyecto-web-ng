@@ -30,39 +30,49 @@ export class DatosPersonalesComponent implements OnInit, DoCheck {
   }
 
   ngOnInit() {
-    console.log(this.usuario);
-  }
-
-  emitirUsuario(form) {
-    console.log(form);
-    /*
-    const nombre = form.controls.nombre.value;
-    const apellido = form.controls.apellido.value;
-    const username = form.controls.username.value;
-    const correo = form.controls.correo.value;
-    const contrasenia = form.controls.contrasenia.value;
-    const imagen = this.imagenUsuario.split(',')[1];
-    const extension = this.imagenUsuario.split(',')[0].split('/')[1].split(';')[0];
-
-    const usuario: UsuarioEdicion = {
-      nombre,
-      apellido,
-      username,
-      correo,
-      contrasenia,
-      imagen,
-      extension,
-    };
-
-    console.log(form);
-    //this.usuarioEmit.emit(usuario);
-  */
-  }
-
-  cambiarFoto(imageInput) {
-    if (imageInput.files[0]) {
-      this.reader.readAsDataURL(imageInput.files[0]);
+    if (this.usuario === undefined){
+      this.usuario =
+        { id: 0,
+          username: '',
+          contrasenia: '',
+          nombre: '',
+          correo: '',
+          apellido: '',
+          imagenUrl: 'assets/images/img_no_usuario.png',
+        };
     }
   }
 
-}
+    emitirUsuario(form) {
+      console.log(form);
+      /*
+      const nombre = form.controls.nombre.value;
+      const apellido = form.controls.apellido.value;
+      const username = form.controls.username.value;
+      const correo = form.controls.correo.value;
+      const contrasenia = form.controls.contrasenia.value;
+      const imagen = this.imagenUsuario.split(',')[1];
+      const extension = this.imagenUsuario.split(',')[0].split('/')[1].split(';')[0];
+
+      const usuario: UsuarioEdicion = {
+        nombre,
+        apellido,
+        username,
+        correo,
+        contrasenia,
+        imagen,
+        extension,
+      };
+
+      console.log(form);
+      //this.usuarioEmit.emit(usuario);
+    */
+    }
+
+    cambiarFoto(imageInput) {
+      if (imageInput.files[0]) {
+        this.reader.readAsDataURL(imageInput.files[0]);
+      }
+    }
+
+  }
