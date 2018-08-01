@@ -1,4 +1,4 @@
- <div class="col-12">
+<div class="col-12">
       <div class="row">
         <div class="card" style="width: 100%">
           <div class="card-header text-center">Detalle</div>
@@ -46,7 +46,7 @@
         <div class="card" style="width: 100%">
           <div class="card-header">Comentarios</div>
           <div class="card-body">
-            <app-comentarios (textoComentarioEmit)="guardarComentarioEmitido($event);" [comentarios]="comentarios" [libro]="libro"></app-comentarios>
+            <app-comentarios (textoComentarioEmit)="guardarComentarioEmitido($event);" [comentarios]="comentarios" [libro]="libro" [erroAlComentar]="error"></app-comentarios>
           </div>
         </div>
 

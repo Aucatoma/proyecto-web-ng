@@ -34,9 +34,14 @@
       <div class="field form-group">
         <textarea id="textoComentario" placeholder="Ingrese su comentario" name="textoComentario" ngModel=""></textarea>
       </div>
-      <button (click)="emitirComentario(); $event.stopPropagation()" class="ui blue labeled submit icon button">
-        <i class="icon edit"></i> Comentar
-      </button>
+      <div>
+        <button (click)="emitirComentario(); $event.stopPropagation()" class="ui blue labeled submit icon button">
+          <i class="icon edit"></i> Comentar
+        </button>
+        <p *ngIf="erroAlComentar" style="color: red">
+          {{ erroAlComentar }}
+        </p>
+      </div>
     </form>
   </div>
 </div>
