@@ -31,6 +31,7 @@ import {AutorService} from './service/autor.service';
 import {GeneroService} from './service/genero.service';
 import {EditorialService} from './service/editorial.service';
 import {ComentarioService} from './service/comentario.service';
+import { SpeechTextComponent } from './speech-text/speech-text.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import {ComentarioService} from './service/comentario.service';
     DetalleLibroComponent,
     ComentariosComponent,
     DetalleComponent,
+    SpeechTextComponent,
   ],
   imports: [
     BrowserModule,
