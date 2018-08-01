@@ -54,7 +54,7 @@ export class DetalleLibroComponent implements OnInit {
       value => {
         console.log('COMENTARIO INSERTADO: ' + JSON.stringify(value));
       },
-      error1 => {console.log(error1); }
+      error1 => {console.log('PILAS HAY UN ERROR: ' + error1); }
     );
   }
 
