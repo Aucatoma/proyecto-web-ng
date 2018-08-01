@@ -24,7 +24,6 @@ export class DetalleComponent implements OnInit, AfterViewInit {
   autor: Autor;
   comentarios: Comentario[];
   editorial: Editorial;
-  puntuacionLibro: number;
 
   constructor(
     private _route: ActivatedRoute,
@@ -95,7 +94,6 @@ export class DetalleComponent implements OnInit, AfterViewInit {
     for (const comentario of this.comentarios) {
       total = comentario.puntuacionLibro + total;
     }
-    this.puntuacionLibro = Math.round(total / this.comentarios.length);
-    console.log('puntuacion del libro: ' + this.puntuacionLibro.toString());
+    this.libro.puntuacion = Math.round(total / this.comentarios.length);
   }
 }

@@ -1,3 +1,5 @@
+import {Comentario} from './comentario';
+
 export interface Libro {
   id: number;
   nombre: string;
@@ -9,4 +11,5 @@ export interface Libro {
   editorialId: number;
   generoId: number;
   imagenUrl: string;
+  puntuacion: number;
 }

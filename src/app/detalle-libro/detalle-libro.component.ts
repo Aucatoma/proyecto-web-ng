@@ -19,7 +19,6 @@ export class DetalleLibroComponent implements OnInit {
   @Input() genero: Genero;
   @Input() autor: Autor;
   @Input() comentarios: Comentario[];
-  @Input() puntuacionLibro: number;
   @HostBinding('attr.class') clase = 'row';
   puntuacionUsuario = 0;
   comentarioUsuario = '';
