@@ -28,6 +28,7 @@ export class SpeechTextComponent implements OnInit, AfterViewInit {
     $('[data-toggle="popover"]').popover({
       trigger: 'focus'
     });
+    $('[data-toggle="tooltip"]').tooltip();
   }
 
   clickMic() {

@@ -14,14 +14,13 @@ export class DatosPersonalesComponent implements OnInit, DoCheck {
   @Output() usuarioEmit = new EventEmitter<UsuarioEdicion>();
   @HostBinding('attr.class') clase = 'col-sm-6';
 
-  imagenUsuario = 'assets/images/img_no_usuario.png';
   reader = new FileReader();
   usuarioForm: Usuario;
 
   constructor() {
     this.reader.onload = () => {
-      this.imagenUsuario = this.reader.result;
-      console.log(this.imagenUsuario);
+      this.usuario.imagenUrl = this.reader.result;
+      console.log(this.usuario.imagenUrl);
     };
 
   }

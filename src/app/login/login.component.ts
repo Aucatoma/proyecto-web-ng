@@ -41,6 +41,6 @@ export class LoginComponent implements OnInit {
       });
   }
   colocarTexto(texto) {
-    document.getElementById('username').value = texto;
+   // document.getElementById('username').value = texto;
   }
 }
