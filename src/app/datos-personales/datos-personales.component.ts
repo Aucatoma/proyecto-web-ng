@@ -43,15 +43,13 @@ export class DatosPersonalesComponent implements OnInit, DoCheck {
   }
 
     emitirUsuario(form) {
-      console.log(form);
-      /*
       const nombre = form.controls.nombre.value;
       const apellido = form.controls.apellido.value;
       const username = form.controls.username.value;
       const correo = form.controls.correo.value;
       const contrasenia = form.controls.contrasenia.value;
-      const imagen = this.imagenUsuario.split(',')[1];
-      const extension = this.imagenUsuario.split(',')[0].split('/')[1].split(';')[0];
+      const imagen = this.usuario.imagenUrl.split(',')[1];
+      const extension = this.usuario.imagenUrl.split(',')[0].split('/')[1].split(';')[0];
 
       const usuario: UsuarioEdicion = {
         nombre,
@@ -62,10 +60,7 @@ export class DatosPersonalesComponent implements OnInit, DoCheck {
         imagen,
         extension,
       };
-
-      console.log(form);
-      //this.usuarioEmit.emit(usuario);
-    */
+      this.usuarioEmit.emit(usuario);
     }
 
     cambiarFoto(imageInput) {

@@ -26,7 +26,6 @@ export class RegistroComponent implements OnInit {
   }
 
   registro(usuario: UsuarioEdicion) {
-    console.log(usuario);
     const crendenciales$ = this.usuarioService.registrar(usuario);
     crendenciales$.subscribe(value => {
       this.credencialesService.login(value);

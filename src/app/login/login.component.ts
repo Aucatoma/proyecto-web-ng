@@ -3,6 +3,7 @@ import {LoginAuthService} from '../authorization/login-auth.service';
 import {Router} from '@angular/router';
 import {CredencialesService} from '../credenciales/credenciales.service';
 import {Location} from '@angular/common';
+declare var $: any;
 
 @Component({
   selector: 'app-login',
@@ -41,6 +42,6 @@ export class LoginComponent implements OnInit {
       });
   }
   colocarTexto(texto) {
-   // document.getElementById('username').value = texto;
+   $('#username').value = texto;
   }
 }
