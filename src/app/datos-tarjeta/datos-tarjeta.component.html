@@ -2,7 +2,7 @@
   <div class="form-row">
     <div class="form-group-col-sm-3">
       <label for="tipo_tar">Tipo de tarjeta</label>
-      <select name="tipo_tar" id="tipo_tar" class="form-control" (change)="cambiarIcono($event)" ngModelGroup="">
+      <select name="tipo_tar" id="tipo_tar" class="form-control" (change)="cambiarIcono($event)" [(ngModel)]="tarjeta.tipo">
         <option *ngFor="let tipo of tipos" value="{{ tipo }}" [attr.selected]="tarjeta.tipo == tipo ? '': null">
           {{ tipo }}
         </option>
@@ -23,14 +23,14 @@
     </div>
     <div class="form-group col-sm-3">
       <label for="mes_tar">Mes</label>
-      <select name="mes_tar" id="mes_tar" class="custom-select" ngModelGroup="">
-        <option *ngFor="let mes of meses" [attr.selected]="( mes * 1) === tarjeta.mes ? '' : null" [value]="mes"> {{mes}}</option>
+      <select name="mes_tar" id="mes_tar" class="custom-select" [(ngModel)]="tarjeta.mes">
+        <option *ngFor="let mes of meses" [value]="mes"> {{mes | mes}}</option>
       </select>
     </div>
     <div class="form-group col-sm-3">
       <label for="anio_tar">Año</label>
-      <select name="anio_tar" id="anio_tar" class="custom-select" ngModelGroup="">
-        <option *ngFor="let anio of anios" [value]="anio" [attr.selected]="(anio*1) === tarjeta.anio ? '' : null">{{anio}}</option>
+      <select name="anio_tar" id="anio_tar" class="custom-select" [(ngModel)]="tarjeta.anio">
+        <option *ngFor="let anio of anios" [value]="anio">{{anio}}</option>
       </select>
     </div>
   </div>

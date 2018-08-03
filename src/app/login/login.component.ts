@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit {
   login(form) {
     const username = form.controls.username.value;
     const contrasenia = form.controls.contrasenia.value;
-
     const login$ = this._loginAuthService.login(username, contrasenia);
     login$.subscribe(value => {
         this.error = undefined;
@@ -41,7 +40,8 @@ export class LoginComponent implements OnInit {
         console.log(error1);
       });
   }
+
   colocarTexto(texto) {
-   $('#username').value = texto;
+   $('#username').val(texto);
   }
 }

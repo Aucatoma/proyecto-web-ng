@@ -3,7 +3,7 @@
     <app-menu></app-menu>
   </div>
   <div class="row">
-    <app-datos-personales *ngIf="usuario != undefined" [usuario]="usuario"></app-datos-personales>
+    <app-datos-personales *ngIf="usuario !== undefined" [usuario]="usuario" (usuarioEmit)="editarUsuario($event)"></app-datos-personales>
     <div class="col-sm 6">
       <div class="row justify-content-center padding-title">
         <h2>Tarjetas de crédito</h2>
@@ -12,19 +12,19 @@
         <button class="btn btn-primary" (click)="mostrarAnadir()">Añadir tarjeta <img src="assets/icon/credit-card-add.png" [height]="25" [width]="25" alt=""> </button>
         </div>
       <div class="row justify-content-center margin-top">
-        <app-tabla-tarjeta [tarjetasRecv]="tarjetas" (tarjetaOutput)="mostrarEdicion($event)"></app-tabla-tarjeta>
+        <app-tabla-tarjeta *ngIf="tarjetas" [tarjetasRecv]="tarjetas" (tarjetaOutput)="mostrarEdicion($event)"></app-tabla-tarjeta>
       </div>
       <div *ngIf="tarjetaSeleccionada" class="row justify-content-center">
         <div class="col-sm-12 text-center padding-title margin-top">
           <h4>Edición de tarjeta</h4>
         </div>
-        <app-datos-tarjeta [tarjeta]="tarjetaSeleccionada"></app-datos-tarjeta>
+        <app-datos-tarjeta [tarjeta]="tarjetaSeleccionada" (tarjetaEmit)="editarTarjeta($event)"></app-datos-tarjeta>
       </div>
       <div *ngIf="crearTarjeta && !tarjetaSeleccionada" class="row justify-content-center">
         <div class="col-sm-12 text-center padding-title margin-top">
           <h4>Nueva tarjeta</h4>
         </div>
-        <app-datos-tarjeta></app-datos-tarjeta>
+        <app-datos-tarjeta (tarjetaEmit)="ingresarTarjeta($event)"></app-datos-tarjeta>
       </div>
     </div>
   </div>

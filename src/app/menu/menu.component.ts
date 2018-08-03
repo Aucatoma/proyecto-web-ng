@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css']
 })
-export class MenuComponent implements OnInit, DoCheck {
+export class MenuComponent implements OnInit {
 
   usuario: Usuario;
   @HostBinding('attr.class') cssClass = 'no-padding col-sm-12';
@@ -18,6 +18,7 @@ export class MenuComponent implements OnInit, DoCheck {
     private _router: Router
   )
   {
+    console.log('Soy menu', this._credencialesService.estaLogeado);
     if (this._credencialesService.estaLogeado) {
       this.usuario = this._credencialesService.credenciales.usuario;
     }
@@ -26,11 +27,6 @@ export class MenuComponent implements OnInit, DoCheck {
   ngOnInit() {
   }
 
-  ngDoCheck() {
-    if (this._credencialesService.estaLogeado) {
-      this.usuario = this._credencialesService.credenciales.usuario;
-    }
-  }
 
   logout(evento) {
     evento.preventDefault();

@@ -8,11 +8,11 @@ import {TarjetaCredito} from '../entidades/tarjeta-credito';
 })
 export class DatosTarjetaComponent implements OnInit, OnChanges{
 
-
   @Input() tarjeta: TarjetaCredito;
+
   @Output() tarjetaEmit = new EventEmitter<TarjetaCredito>();
 
-  meses = ['01', '02', '03', '04', '05', '05', '07', '08', '09', '10', '11', '12'];
+  meses = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
   anios = [];
   tipos = ['Elija el tipo', 'Visa', 'Mastercard', 'American Express'];
   icono: string;
@@ -35,7 +35,7 @@ export class DatosTarjetaComponent implements OnInit, OnChanges{
         numero: '',
         codigo: '',
         mes: 1,
-        anio: 1,
+        anio: 12,
         tipo: 'Elija el tipo'
       };
     }
@@ -49,7 +49,10 @@ export class DatosTarjetaComponent implements OnInit, OnChanges{
   }
 
   emitirTarjeta(form) {
-    console.log(form);
+    this.tarjeta.numero = form.controls.num_tarjeta.value;
+    this.tarjeta.codigo = form.controls.cod_tar.value;
+    this.tarjeta.tipo = form.controls.tipo_tar.value;
+    this.tarjetaEmit.emit(this.tarjeta);
   }
 
   cambiarIcono(evento) {

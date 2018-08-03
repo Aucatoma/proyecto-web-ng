@@ -6,4 +6,3 @@ export interface TarjetaCredito {
   anio: number;
   tipo: string;
 }
-
