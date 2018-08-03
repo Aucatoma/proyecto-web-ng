@@ -13,26 +13,31 @@ export class DetallePedidoComponent implements OnInit, AfterViewInit {
 
   @Output() cantidadTotalEmit = new EventEmitter<number>();
   @Output() precioTotalEmit = new EventEmitter<number>();
-  detallesRecibidos: DetallePedido[] = [];
+  detallesRecibidos: DetallePedido[];
   precioTotal = 0;
   cantidadTotal = 0;
-  constructor(private _carritoComprasService: CarritoComprasService) { }
+  constructor(private _carritoComprasService: CarritoComprasService) {
+    this.detallesRecibidos = this._carritoComprasService.detalles;
+  }
 
   ngOnInit() {
     this.detallesRecibidos = this._carritoComprasService.detalles;
+    this.calcularCantidadYPrecioTotal();
+    this.emitirCantidadTotalYPrecioTotal();
   }
   ngAfterViewInit(): void {
   }
   calcularPrecioTotal(cantidad, libro, indice) {
-    this.detallesRecibidos[indice].precioTotalPorDetalle = cantidad.value * libro.precio;
-    document.getElementById(indice).innerText = '$' + this.detallesRecibidos[indice].precioTotalPorDetalle + '';
-    this.detallesRecibidos[indice].cantidad = cantidad.value;
+    this._carritoComprasService.detalles[indice].precioTotalPorDetalle = cantidad.value * libro.precio;
+    document.getElementById(indice).innerText = '$' + this._carritoComprasService.detalles[indice].precioTotalPorDetalle + '';
+    this._carritoComprasService.detalles[indice].cantidad = cantidad.value;
     this.calcularCantidadYPrecioTotal();
     this.emitirCantidadTotalYPrecioTotal();
+    this.detallesRecibidos = this._carritoComprasService.detalles;
   }
   quitarDelCarrito(detalle: DetallePedido, libro: Libro) {
     this._carritoComprasService.quitarDetalle(detalle);
-    console.log('SE ELEMINO: ' + libro.id);
+    // console.log('SE ELEMINO: ' + libro.id);
     this.calcularCantidadYPrecioTotal();
     this.emitirCantidadTotalYPrecioTotal();
   }
@@ -44,11 +49,11 @@ export class DetallePedidoComponent implements OnInit, AfterViewInit {
   calcularCantidadYPrecioTotal() {
     this.cantidadTotal = 0;
     this.precioTotal = 0;
-    for (const detallePedido of this.detallesRecibidos) {
+    for (const detallePedido of this._carritoComprasService.detalles) {
       this.cantidadTotal = this.cantidadTotal + detallePedido.cantidad * 1;
       this.precioTotal = this.precioTotal + detallePedido.precioTotalPorDetalle * 1;
     }
-    console.log('CANTIDAD TOTAL AL MOMENTO: ' + this.cantidadTotal);
-    console.log('PRECIO TOTAL AL MOMENTO: ' + this.precioTotal);
+    // console.log('CANTIDAD TOTAL AL MOMENTO: ' + this.cantidadTotal);
+    // console.log('PRECIO TOTAL AL MOMENTO: ' + this.precioTotal);
   }
 }

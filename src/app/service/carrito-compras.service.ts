@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Libro} from '../entidades/libro';
-import {DetallePedidoComponent} from '../detalle-pedido/detalle-pedido.component';
 import {DetallePedido} from '../entidades/detalle-pedido';
 
 @Injectable({
