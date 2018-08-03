@@ -15,7 +15,7 @@
               </div>
               <div class="col-4" style="padding-top: 50px">
                 <div class="card" style="width: 100%">
-                  <div class="card-header text-center">{{libro?.nombre}}</div>
+                  <div class="card-header text-center bg-dark" style="font-weight: bold; color: white">{{libro?.nombre}}</div>
                   <div class="card-body">
                     <div class="row justify-content-center">
                       <div class="col-7 text-center">
@@ -30,7 +30,7 @@
                 </div>
               </div>
               <div class="col-4 text-center" style="padding-top: 50px">
-                <a href="#" class="btn btn-primary">Agregar al carrito: ${{libro?.precio}}</a>
+                <button (click)="agregarAlCarrito(libro)" class="btn btn-primary">{{textoBotonAgregarCarrito}}</button>
                 <div style="padding-top: 10px">
                   <h4>Por favor, califique este título:</h4>
                   <app-rating (puntuacionUsuarioEmit)="guardarPuntuacionEmitida($event);"></app-rating>

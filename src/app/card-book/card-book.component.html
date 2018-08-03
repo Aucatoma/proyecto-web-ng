@@ -1,13 +1,13 @@
-<div (click)="emitirLibro()" class="container">
+<div class="container">
   <div class="row">
     <div class="col-xl-12 d-flex justify-content-around align-self-center " href="#" style="padding-top: 25px; padding-bottom: 25px">
       <div class="card mx-auto card-shadow card-deck  card-clickable">
-        <img class="card-img-top" [src]="libro.imagenUrl" [alt]="libro.nombre" style="width: 220px; height: 260px" href="#" >
+        <img (click)="emitirLibro()" class="card-img-top" [src]="libro.imagenUrl" [alt]="libro.nombre" style="width: 220px; height: 260px">
         <div class="card-body">
           <h3 class="card-title">{{libro.nombre}}</h3>
           <p class="card-text">Año: {{libro.anio}}</p>
           <p class="card-text" style="pointer-events: none"><app-rating [puntuacion]="libro?.puntuacion"></app-rating></p>
-          <a href="#" class="btn btn-primary">Comprar: ${{libro.precio}}</a>
+          <button (click)="agregarAlCarrito(libro)" class="btn btn-primary">{{textoBotonAgregarCarrito}}</button>
         </div>
       </div>
     </div>

@@ -11,6 +11,8 @@ import {GeneroService} from '../service/genero.service';
 import {AutorService} from '../service/autor.service';
 import {EditorialService} from '../service/editorial.service';
 import {ComentarioService} from '../service/comentario.service';
+import {stringify} from '@angular/core/src/util';
+import {ComentarioGet} from '../entidades/comentario-get';
 
 @Component({
   selector: 'app-detalle',
@@ -22,9 +24,8 @@ export class DetalleComponent implements OnInit, AfterViewInit {
   libro: Libro;
   genero: Genero;
   autor: Autor;
-  comentarios: Comentario[];
+  comentarios: ComentarioGet[];
   editorial: Editorial;
-
   constructor(
     private _route: ActivatedRoute,
     private _libroService: LibroService,
@@ -47,7 +48,7 @@ export class DetalleComponent implements OnInit, AfterViewInit {
       this.obtenerAutor(this.libro.id + '');
       this.obtenerEditorial(this.libro.id + '');
       this.obtenerGenero(this.libro.id + '');
-      this.obtenerComentarios(this.libro.id + '');
+      this.obtenerUsuarioComentario(this.libro.id + '');
     }, error1 => console.log(error1));
   }
   obtenerAutor(id: string) {
@@ -71,29 +72,13 @@ export class DetalleComponent implements OnInit, AfterViewInit {
       console.log(this.editorial);
     }, error1 => console.log(error1));
   }
-  obtenerComentarios(id: string) {
-    const comentarios$ = this._comentarioService.obtenerPorLibroId(id);
-    comentarios$.subscribe(value => {
+
+  obtenerUsuarioComentario(id: string) {
+    const comentario$ = this._comentarioService.obtenerUsuarioComentario(id);
+    comentario$.subscribe(value => {
       this.comentarios = value;
       console.log(this.comentarios);
-      this.obtenerPuntuacionDeLibro();
-    }, error1 => console.log(error1));
-  }
-  insertarComentario(comentario: Comentario) {
-    const comentario$ = this._comentarioService.insertarComentario(comentario);
-    comentario$.subscribe(
-      value => {
-        console.log('COMENTARIO INSERTADO: ' + value);
-      },
-        error1 => {
-        console.log(error1);
-      });
-  }
-  obtenerPuntuacionDeLibro() {
-    let total = 0;
-    for (const comentario of this.comentarios) {
-      total = comentario.puntuacionLibro + total;
-    }
-    this.libro.puntuacion = Math.round(total / this.comentarios.length);
+    }, error1 => { console.log(error1); });
   }
 }
+

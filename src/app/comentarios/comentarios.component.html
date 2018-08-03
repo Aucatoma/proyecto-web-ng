@@ -4,12 +4,12 @@
       <div *ngFor="let comentario of comentarios" class="comment">
 
         <a class="avatar">
-          <img src="http://3.bp.blogspot.com/-DTk2MXZ6tSo/UAVKQlDXxKI/AAAAAAAAAx0/gHd4P0WexwM/s1600/hablaocalla.jpg" alt="">
+          <img [src]="comentario?.usuario?.imagenUrl" alt="Avatar usuario">
         </a>
 
         <div class="content">
 
-          <a class="author">Max</a>
+          <a class="author">{{comentario?.usuario?.username}}</a>
 
           <div class="metadata">
             <span class="date">{{comentario?.fecha}}</span>

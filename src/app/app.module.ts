@@ -32,6 +32,9 @@ import {EditorialService} from './service/editorial.service';
 import {ComentarioService} from './service/comentario.service';
 import {SpeechTextService} from './service/speech-text.service';
 import {SpeechTextComponent} from './speech-text/speech-text.component';
+import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
+import { CabeceraPedidoComponent } from './cabecera-pedido/cabecera-pedido.component';
+import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
 import {ConfigService} from './service/config.service';
 import {TarjetaCreditoService} from './service/tarjeta-credito.service';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
@@ -62,6 +65,9 @@ export function init_app(credencialesService: CredencialesService) {
     ComentariosComponent,
     DetalleComponent,
     SpeechTextComponent,
+    DetallePedidoComponent,
+    CabeceraPedidoComponent,
+    CarritoComprasComponent,
   ],
   imports: [
     BrowserModule,
@@ -82,7 +88,7 @@ export function init_app(credencialesService: CredencialesService) {
     TarjetaCreditoService,
     { provide: APP_INITIALIZER, useFactory: init_app, deps: [CredencialesService], multi: true },
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 
