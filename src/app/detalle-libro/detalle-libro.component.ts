@@ -10,6 +10,7 @@ import {ErrorHandlerService} from '../service/error-handler.service';
 import {Comentario} from '../entidades/comentario';
 import {ComentarioGet} from '../entidades/comentario-get';
 import {CarritoComprasService} from '../service/carrito-compras.service';
+import {Router} from '@angular/router';
 declare var $;
 @Component({
   selector: 'app-detalle-libro',
@@ -34,6 +35,7 @@ export class DetalleLibroComponent implements OnInit {
   error = undefined;
 
   constructor(
+    private _router: Router,
     private _comentarioService: ComentarioService,
     private _errorHandlerService: ErrorHandlerService,
     private _credencialesService: CredencialesService,
@@ -98,6 +100,10 @@ export class DetalleLibroComponent implements OnInit {
     } else {
       this.textoBotonAgregarCarrito = 'Agregar al carrito: $' + libro.precio;
       this.estaAgregado = false;
+      this.irACarrito();
     }
+  }
+  irACarrito() {
+    this._router.navigate(['/carrito']);
   }
 }

@@ -2,6 +2,7 @@ import {AfterViewInit, Component, EventEmitter, HostBinding, Input, OnInit, Outp
 import {Libro} from '../entidades/libro';
 import {LibroService} from '../service/libro.service';
 import {CarritoComprasService} from '../service/carrito-compras.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class CardBookComponent implements OnInit {
   textoBotonAgregarCarrito = '';
   estaAgregado = false;
 
-  constructor(private _libroService: LibroService,
+  constructor(private _router: Router,
+              private _libroService: LibroService,
               private _carritoComprasService: CarritoComprasService) { }
 
   ngOnInit() {
@@ -33,6 +35,10 @@ export class CardBookComponent implements OnInit {
     } else {
       this.textoBotonAgregarCarrito = 'Agregar al carrito: $' + libro.precio;
       this.estaAgregado = false;
+      this.irACarrito();
     }
+  }
+  irACarrito() {
+    this._router.navigate(['/carrito']);
   }
 }

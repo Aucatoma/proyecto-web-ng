@@ -33,7 +33,6 @@ export class CatalogoComponent implements OnInit {
   irADetalle(libro) {
     this._router.navigate(['/detalle', `${libro.id}`]);
   }
-
   buscarLibros(evento) {
     if (evento.filtro === 'Libro') {
       const libros$ = this._libroService.obtenerLike(evento.texto);

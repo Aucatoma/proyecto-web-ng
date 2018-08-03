@@ -35,6 +35,7 @@ import {SpeechTextService} from './service/speech-text.service';
 import {SpeechTextComponent} from './speech-text/speech-text.component';
 import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
 import { CabeceraPedidoComponent } from './cabecera-pedido/cabecera-pedido.component';
+import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { CabeceraPedidoComponent } from './cabecera-pedido/cabecera-pedido.compo
     SpeechTextComponent,
     DetallePedidoComponent,
     CabeceraPedidoComponent,
+    CarritoComprasComponent,
   ],
   imports: [
     BrowserModule,

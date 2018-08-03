@@ -1,0 +1,18 @@
+<div class="row">
+  <app-menu></app-menu>
+</div>
+<div class="row" style="padding-top: 15px; padding-left: 250px">
+  <div class="col">
+    <h2>Detalle del Pedido</h2>
+  </div>
+</div>
+<div class="container-fluid" style="padding-top: 15px">
+  <div class="row">
+    <div class="col-7">
+      <app-detalle-pedido (cantidadEmit)="guardarCantidad($event)"></app-detalle-pedido>
+    </div>
+    <div class="col-5">
+      <app-cabecera-pedido [cantidadTotal]="cantidadTotal"></app-cabecera-pedido>
+    </div>
+  </div>
+</div>
