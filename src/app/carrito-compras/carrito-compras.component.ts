@@ -8,12 +8,18 @@ import {Component, OnInit, Output} from '@angular/core';
 export class CarritoComprasComponent implements OnInit {
 
   @Output() cantidadTotal = 0;
+  @Output() precioTotal = 0;
   constructor() { }
 
   ngOnInit() {
   }
-  guardarCantidad(cantidad) {
-    this.cantidadTotal = cantidad;
+  guardarCantidadTotal(cantidadTotal) {
+    this.cantidadTotal = cantidadTotal;
+    console.log('A CARRITO SE EMITIO ESTO EN CANTIDAD TOTAL: ' + this.cantidadTotal);
+  }
+  guardarPrecioTotal(precioTotal) {
+    this.precioTotal = precioTotal;
+    console.log('A CARRITO SE EMITIO ESTO EN PRECIO TOTAL: ' + this.precioTotal);
   }
 
 }

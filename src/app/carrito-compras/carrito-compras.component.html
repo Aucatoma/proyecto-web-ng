@@ -9,10 +9,10 @@
 <div class="container-fluid" style="padding-top: 15px">
   <div class="row">
     <div class="col-7">
-      <app-detalle-pedido (cantidadEmit)="guardarCantidad($event)"></app-detalle-pedido>
+      <app-detalle-pedido (cantidadTotalEmit)="guardarCantidadTotal($event)" (precioTotalEmit)="guardarPrecioTotal($event)"></app-detalle-pedido>
     </div>
     <div class="col-5">
-      <app-cabecera-pedido [cantidadTotal]="cantidadTotal"></app-cabecera-pedido>
+      <app-cabecera-pedido [cantidadTotal]="cantidadTotal" [precioTotal]="precioTotal"></app-cabecera-pedido>
     </div>
   </div>
 </div>

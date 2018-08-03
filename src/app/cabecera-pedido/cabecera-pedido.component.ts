@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class CabeceraPedidoComponent implements OnInit {
   @Input() cantidadTotal;
+  @Input() precioTotal;
   constructor() { }
 
   ngOnInit() {
