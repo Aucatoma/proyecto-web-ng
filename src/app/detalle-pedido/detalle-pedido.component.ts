@@ -40,6 +40,7 @@ export class DetallePedidoComponent implements OnInit, AfterViewInit {
     // console.log('SE ELEMINO: ' + libro.id);
     this.calcularCantidadYPrecioTotal();
     this.emitirCantidadTotalYPrecioTotal();
+    this.detallesRecibidos = this._carritoComprasService.detalles;
   }
   emitirCantidadTotalYPrecioTotal() {
     // console.log('llegue');

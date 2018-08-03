@@ -12,7 +12,7 @@
       <app-detalle-pedido (cantidadTotalEmit)="guardarCantidadTotal($event)" (precioTotalEmit)="guardarPrecioTotal($event)"></app-detalle-pedido>
     </div>
     <div class="col-5">
-      <app-cabecera-pedido [cantidadTotal]="cantidadTotal" [precioTotal]="precioTotal"></app-cabecera-pedido>
+      <app-cabecera-pedido [cantidadTotal]="cantidadTotal" [subtotal]="subtotal" [precioFinal]="total"></app-cabecera-pedido>
     </div>
   </div>
 </div>

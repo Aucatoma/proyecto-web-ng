@@ -7,6 +7,6 @@ export class DetallePedido {
   constructor (cantidad: number, libro: Libro) {
     this.cantidad = cantidad;
     this.libro = libro;
-    this.precioTotalPorDetalle = 0;
+    this.precioTotalPorDetalle = libro.precio;
   }
 }

@@ -8,7 +8,8 @@ import {Component, OnInit, Output} from '@angular/core';
 export class CarritoComprasComponent implements OnInit {
 
   @Output() cantidadTotal = 0;
-  @Output() precioTotal = 0;
+  @Output() subtotal = 0;
+  @Output() total = 0;
   constructor() { }
 
   ngOnInit() {
@@ -18,8 +19,12 @@ export class CarritoComprasComponent implements OnInit {
     // console.log('A CARRITO SE EMITIO ESTO EN CANTIDAD TOTAL: ' + this.cantidadTotal);
   }
   guardarPrecioTotal(precioTotal) {
-    this.precioTotal = precioTotal;
+    this.subtotal = precioTotal;
+    this.calcularPrecioFinal();
     // console.log('A CARRITO SE EMITIO ESTO EN PRECIO TOTAL: ' + this.precioTotal);
   }
 
+  private calcularPrecioFinal() {
+    this.total = (this.subtotal * 0.12) + this.subtotal;
+  }
 }

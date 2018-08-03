@@ -96,7 +96,7 @@ export class DetalleLibroComponent implements OnInit {
   agregarAlCarrito(libro: Libro) {
     if (this.estaAgregado === false) {
       this.textoBotonAgregarCarrito = 'Ir al carrito';
-      this._carritoComprasService.agregarDetalle(new DetallePedido(0, libro));
+      this._carritoComprasService.agregarDetalle(new DetallePedido(1, libro));
       this.estaAgregado = true;
     } else {
       this.textoBotonAgregarCarrito = 'Agregar al carrito: $' + libro.precio;
