@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {TarjetaCredito} from '../entidades/tarjeta-credito';
 
 @Component({
@@ -6,7 +6,7 @@ import {TarjetaCredito} from '../entidades/tarjeta-credito';
   templateUrl: './tabla-tarjeta.component.html',
   styleUrls: ['./tabla-tarjeta.component.css']
 })
-export class TablaTarjetaComponent implements OnInit, AfterViewInit {
+export class TablaTarjetaComponent implements OnInit, AfterViewInit, OnChanges {
 
 
   @Input() tarjetasRecv: TarjetaCredito[];
@@ -19,6 +19,11 @@ export class TablaTarjetaComponent implements OnInit, AfterViewInit {
 
   constructor() {
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('changes');
+  }
+
 
   ngOnInit() {
     for (let i = 0; i < this.tarjetasRecv.length / 2 ; i++) {
@@ -33,11 +38,14 @@ export class TablaTarjetaComponent implements OnInit, AfterViewInit {
     document.getElementById('prev').classList.add('disabled');
   }
 
+
+
   emitirTarjeta(tarjeta) {
     this.tarjetaOutput.emit(tarjeta);
   }
 
   tomarAnteriores(evento) {
+    console.log('Anteriores')
     evento.preventDefault();
     if ((this.current - 2) >= 0 ) {
       document.getElementById('next').classList.remove('disabled');
@@ -59,6 +67,7 @@ export class TablaTarjetaComponent implements OnInit, AfterViewInit {
   }
 
   tomarSiguientes(evento) {
+    console.log('siguientes')
     evento.preventDefault();
     if ((this.end + 2) <= this.tarjetasRecv.length || (this.end + 1) <=  this.tarjetasRecv.length) {
       document.getElementById('prev').classList.remove('disabled');
@@ -81,7 +90,7 @@ export class TablaTarjetaComponent implements OnInit, AfterViewInit {
 
   tomarPorIndice(indice, evento, li) {
     evento.preventDefault();
-    if(this.liActive !== undefined){
+    if(this.liActive !== undefined) {
       this.liActive.classList.remove('active');
     }
     this.liActive = li;
@@ -95,15 +104,17 @@ export class TablaTarjetaComponent implements OnInit, AfterViewInit {
       this.current = indice;
     }
     this.end = indice * 2;
-    if(this.current === 0) {
+    if (this.current === 0) {
+      console.log('cero');
       document.getElementById('prev').classList.add('disabled');
-    }else{
-      document.getElementById('prev').classList.remove('disabled');
+    } else {
+      document.getElementById('next').classList.remove('disabled');
     }
-    if(this.end >= this.tarjetasRecv.length){
+    if (this.end >= this.tarjetasRecv.length) {
+      console.log('último');
       document.getElementById('next').classList.add('disabled');
-    }else{
-      document.getElementById('next').classList.add('remove');
+    } else {
+      document.getElementById('prev').classList.remove('disabled');
     }
     console.log(this.current, this.end);
     this.tarjetas = this.tarjetasRecv.slice(this.current, this.end);

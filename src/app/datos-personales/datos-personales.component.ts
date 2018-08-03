@@ -42,14 +42,12 @@ export class DatosPersonalesComponent implements OnInit, DoCheck {
     }
   }
 
-    emitirUsuario(form) {
+  emitirUsuario(form) {
       const nombre = form.controls.nombre.value;
       const apellido = form.controls.apellido.value;
       const username = form.controls.username.value;
       const correo = form.controls.correo.value;
       const contrasenia = form.controls.contrasenia.value;
-      const imagen = this.usuario.imagenUrl.split(',')[1];
-      const extension = this.usuario.imagenUrl.split(',')[0].split('/')[1].split(';')[0];
 
       const usuario: UsuarioEdicion = {
         nombre,
@@ -57,16 +55,31 @@ export class DatosPersonalesComponent implements OnInit, DoCheck {
         username,
         correo,
         contrasenia,
-        imagen,
-        extension,
+        imagen: 'na',
+        extension: ''
       };
+    if (this.usuario.id !== 0) {
+      usuario['id'] = this.usuario.id;
+      console.log(usuario['id']);
+      if (form.controls.imagen.dirty) {
+        usuario.imagen = this.usuario.imagenUrl.split(',')[1];
+        usuario.extension = this.usuario.imagenUrl.split(',')[0].split('/')[1].split(';')[0];
+        this.usuarioEmit.emit(usuario);
+      } else {
+        usuario.extension = this.usuario.imagenUrl.split('.')[1];
+        this.usuarioEmit.emit(usuario);
+      }
+    } else {
+      usuario.imagen = this.usuario.imagenUrl.split(',')[1];
+      usuario.extension = this.usuario.imagenUrl.split(',')[0].split('/')[1].split(';')[0];
       this.usuarioEmit.emit(usuario);
     }
-
-    cambiarFoto(imageInput) {
-      if (imageInput.files[0]) {
-        this.reader.readAsDataURL(imageInput.files[0]);
-      }
-    }
-
   }
+
+  cambiarFoto(imageInput) {
+    if (imageInput.files[0]) {
+      this.reader.readAsDataURL(imageInput.files[0]);
+    }
+  }
+
+}

@@ -1,5 +1,4 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { CarruselComponent } from './carrusel/carrusel.component';
@@ -36,6 +35,14 @@ import {SpeechTextComponent} from './speech-text/speech-text.component';
 import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
 import { CabeceraPedidoComponent } from './cabecera-pedido/cabecera-pedido.component';
 import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
+import {ConfigService} from './service/config.service';
+import {TarjetaCreditoService} from './service/tarjeta-credito.service';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
+
+
+export function init_app(credencialesService: CredencialesService) {
+  return () => credencialesService.configurar();
+}
 
 @NgModule({
   declarations: [
@@ -69,16 +76,23 @@ import { CarritoComprasComponent } from './carrito-compras/carrito-compras.compo
     FormsModule,
   ],
   providers: [
+    CredencialesService,
+    ConfigService,
     LoginAuthService,
     LibroService,
-    CredencialesService,
     AutorService,
     GeneroService,
     EditorialService,
     ComentarioService,
-    SpeechTextService
+    SpeechTextService,
+    TarjetaCreditoService,
+    { provide: APP_INITIALIZER, useFactory: init_app, deps: [CredencialesService], multi: true },
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+
+  constructor(
+  ) {
+  }
 }
