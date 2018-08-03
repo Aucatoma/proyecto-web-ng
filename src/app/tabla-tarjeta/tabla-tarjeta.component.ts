@@ -21,7 +21,7 @@ export class TablaTarjetaComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    for (let i = 0; i < this.tarjetasRecv.length / 2 ; i++){
+    for (let i = 0; i < this.tarjetasRecv.length / 2 ; i++) {
       this.indicePaginacion.push(i + 1);
     }
     this.tarjetas = this.tarjetasRecv.slice(this.current, this.end);

@@ -33,6 +33,8 @@ import {EditorialService} from './service/editorial.service';
 import {ComentarioService} from './service/comentario.service';
 import {SpeechTextService} from './service/speech-text.service';
 import {SpeechTextComponent} from './speech-text/speech-text.component';
+import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
+import { CabeceraPedidoComponent } from './cabecera-pedido/cabecera-pedido.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import {SpeechTextComponent} from './speech-text/speech-text.component';
     ComentariosComponent,
     DetalleComponent,
     SpeechTextComponent,
+    DetallePedidoComponent,
+    CabeceraPedidoComponent,
   ],
   imports: [
     BrowserModule,

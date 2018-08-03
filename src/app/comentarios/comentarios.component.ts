@@ -3,6 +3,8 @@ import {Comentario} from '../entidades/comentario';
 import {ComentarioService} from '../service/comentario.service';
 import {Libro} from '../entidades/libro';
 import {Usuario} from '../entidades/usuario';
+import {CredencialesService} from '../credenciales/credenciales.service';
+import {ComentarioGet} from '../entidades/comentario-get';
 
 @Component({
   selector: 'app-comentarios',
@@ -10,13 +12,13 @@ import {Usuario} from '../entidades/usuario';
   styleUrls: ['./comentarios.component.css']
 })
 export class ComentariosComponent implements OnInit {
-  @Input() comentarios: Comentario[];
+  @Input() comentarios: ComentarioGet[];
   @Input() libro: Libro;
   @Input() usuario: Usuario;
   @Input() erroAlComentar = undefined;
   @Output() textoComentarioEmit = new EventEmitter<string>();
   textoComentario = '';
-  constructor(private _comentarioService: ComentarioService) { }
+  constructor() { }
 
   ngOnInit() { }
 

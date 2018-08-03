@@ -1,0 +1,28 @@
+<table class="table table-sm text-center">
+  <thead>
+  <tr>
+    <th scope="col">Portada</th>
+    <th scope="col">Libro</th>
+    <th scope="col">Cantidad</th>
+    <th scope="col">Precio Unitario</th>
+    <th scope="col">Precio Total</th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let libro of librosRecibidos; let indice = index;">
+    <td>
+      <img [src]="libro.imagenUrl" alt="Portada" class="portada-detalle-pedido">
+    </td>
+    <td class="texto-detalle-pedido" style="font-weight: bold;">{{libro?.nombre}}</td>
+    <td class="texto-detalle-pedido">
+      <input #cantidad (click)="calcularPrecioTotal(cantidad, libro, indice)" id="cantidadInput" class="text-center estilo-input-cantidad" type="number" name="cantidad" min="1" max="100" step="1" value="1">
+    </td>
+    <td class="texto-detalle-pedido">$ {{libro?.precio}}</td>
+    <td class="texto-detalle-pedido" style="font-weight: bold"><p [id]="indice">$ {{libro?.precio}}</p></td>
+    <td>
+      <button (click)="quitarDelCarrito(libro)" class="btn btn-danger" style="margin-top: 35px">Quitar del Carrito</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
