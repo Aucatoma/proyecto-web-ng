@@ -15,11 +15,11 @@ export class CarritoComprasComponent implements OnInit {
   }
   guardarCantidadTotal(cantidadTotal) {
     this.cantidadTotal = cantidadTotal;
-    console.log('A CARRITO SE EMITIO ESTO EN CANTIDAD TOTAL: ' + this.cantidadTotal);
+    // console.log('A CARRITO SE EMITIO ESTO EN CANTIDAD TOTAL: ' + this.cantidadTotal);
   }
   guardarPrecioTotal(precioTotal) {
     this.precioTotal = precioTotal;
-    console.log('A CARRITO SE EMITIO ESTO EN PRECIO TOTAL: ' + this.precioTotal);
+    // console.log('A CARRITO SE EMITIO ESTO EN PRECIO TOTAL: ' + this.precioTotal);
   }
 
 }

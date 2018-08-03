@@ -3,6 +3,7 @@ import {Libro} from '../entidades/libro';
 import {LibroService} from '../service/libro.service';
 import {CarritoComprasService} from '../service/carrito-compras.service';
 import {Router} from '@angular/router';
+import {DetallePedido} from '../entidades/detalle-pedido';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class CardBookComponent implements OnInit {
   agregarAlCarrito(libro: Libro) {
     if (this.estaAgregado === false) {
       this.textoBotonAgregarCarrito = 'Ir al carrito';
-      this._carritoComprasService.agregarLibro(libro);
+      this._carritoComprasService.agregarDetalle(new DetallePedido(0, libro));
       this.estaAgregado = true;
     } else {
       this.textoBotonAgregarCarrito = 'Agregar al carrito: $' + libro.precio;

@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import {Libro} from '../entidades/libro';
+import {DetallePedidoComponent} from '../detalle-pedido/detalle-pedido.component';
+import {DetallePedido} from '../entidades/detalle-pedido';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarritoComprasService {
-  libros: Libro[] = [];
+  detalles: DetallePedido[] = [];
   constructor() { }
-  agregarLibro(libro: Libro) {
-    this.libros.splice(this.libros.length, 0, libro);
-    localStorage.setItem('libros', JSON.stringify(this.libros));
+  agregarDetalle(detalle: DetallePedido) {
+    this.detalles.splice(this.detalles.length, 0, detalle);
+    localStorage.setItem('detalles', JSON.stringify(this.detalles));
   }
-  quitarLibro(libro) {
-    this.libros.splice(this.libros.findIndex(i => i.id === libro.id), 1);
-    localStorage.setItem('libros', JSON.stringify(this.libros));
+  quitarDetalle(detalle) {
+    this.detalles.splice(this.detalles.findIndex(i => i === detalle), 1);
+    localStorage.setItem('detalles', JSON.stringify(this.detalles));
   }
 }

@@ -13,49 +13,42 @@ export class DetallePedidoComponent implements OnInit, AfterViewInit {
 
   @Output() cantidadTotalEmit = new EventEmitter<number>();
   @Output() precioTotalEmit = new EventEmitter<number>();
-  librosRecibidos: Libro[] = [];
-  precioTotalPorDetalle = 0;
+  detallesRecibidos: DetallePedido[] = [];
   precioTotal = 0;
   cantidadTotal = 0;
-  detallesPedido: DetallePedido[];
   constructor(private _carritoComprasService: CarritoComprasService) { }
 
   ngOnInit() {
-    this.librosRecibidos = this._carritoComprasService.libros;
-    this.detallesPedido = [];
-    this.precioTotalPorDetalle = 0;
+    this.detallesRecibidos = this._carritoComprasService.detalles;
   }
   ngAfterViewInit(): void {
-    for (const libro of this.librosRecibidos) {
-      this.detallesPedido.splice(this.detallesPedido.length, 0, new DetallePedido(0, libro));
-    }
   }
-  calcularPrecioTotal(cantidad, libro: Libro, indice) {
-    this.precioTotalPorDetalle = cantidad.value * libro.precio;
-    document.getElementById(indice).innerText = '$' + this.precioTotalPorDetalle + '';
-    this.detallesPedido[indice].cantidad = cantidad.value;
-    this.detallesPedido[indice].precioTotalPorDetalle = this.precioTotalPorDetalle;
+  calcularPrecioTotal(cantidad, libro, indice) {
+    this.detallesRecibidos[indice].precioTotalPorDetalle = cantidad.value * libro.precio;
+    document.getElementById(indice).innerText = '$' + this.detallesRecibidos[indice].precioTotalPorDetalle + '';
+    this.detallesRecibidos[indice].cantidad = cantidad.value;
     this.calcularCantidadYPrecioTotal();
-    this.emitirCantidadTotal();
-    this.emitirPrecioTotal();
+    this.emitirCantidadTotalYPrecioTotal();
   }
-  quitarDelCarrito(libro: Libro) {
-    this._carritoComprasService.quitarLibro(libro);
+  quitarDelCarrito(detalle: DetallePedido, libro: Libro) {
+    this._carritoComprasService.quitarDetalle(detalle);
+    console.log('SE ELEMINO: ' + libro.id);
     this.calcularCantidadYPrecioTotal();
+    this.emitirCantidadTotalYPrecioTotal();
   }
-  emitirCantidadTotal() {
+  emitirCantidadTotalYPrecioTotal() {
     // console.log('llegue');
     this.cantidadTotalEmit.emit(this.cantidadTotal);
-  }
-  private emitirPrecioTotal() {
     this.precioTotalEmit.emit(this.precioTotal);
   }
   calcularCantidadYPrecioTotal() {
     this.cantidadTotal = 0;
     this.precioTotal = 0;
-    for (const detallePedido of this.detallesPedido) {
+    for (const detallePedido of this.detallesRecibidos) {
       this.cantidadTotal = this.cantidadTotal + detallePedido.cantidad * 1;
       this.precioTotal = this.precioTotal + detallePedido.precioTotalPorDetalle * 1;
     }
+    console.log('CANTIDAD TOTAL AL MOMENTO: ' + this.cantidadTotal);
+    console.log('PRECIO TOTAL AL MOMENTO: ' + this.precioTotal);
   }
 }
