@@ -17,9 +17,9 @@
               <div class="col-5">
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item text-center">{{cantidadTotal}} libros</li>
-                  <li class="list-group-item text-center">${{precioTotal}}</li>
+                  <li class="list-group-item text-center">${{subtotal}}</li>
                   <li class="list-group-item text-center">12 %</li>
-                  <li class="list-group-item text-center" style="font-weight: bold">$1200</li>
+                  <li class="list-group-item text-center" style="font-weight: bold">${{precioFinal}}</li>
                 </ul>
               </div>
             </div>
@@ -29,8 +29,13 @@
       </div>
     </div>
     <div class="row text-center">
-      <div class="col" style="padding-top: 20px; padding-bottom: 20px">
-        <button class="btn btn-primary">Comprar</button>
+      <div *ngIf="!exito" class="col" style="padding-top: 15px; padding-bottom: 20px">
+        <button (click)="registrarPedido()" class="btn btn-primary">Comprar</button>
+        <p *ngIf = "error" style="color: red">{{error}}</p>
+      </div>
+      <div *ngIf="exito" class="col" style="padding-top: 15px; padding-bottom: 20px">
+        <button (click)="irAlCatalogo()" class="btn btn-success">{{exito}}</button>
+        <p *ngIf = "error" style="color: red">{{error}}</p>
       </div>
     </div>
   </div>
