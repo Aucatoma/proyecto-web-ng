@@ -38,7 +38,8 @@ export class CredencialesService {
   configurar(): Promise<any> {
     const jwtoken = this.getCookie('jwt');
     if (localStorage.getItem('detalles') !== null) {
-      console.log('Carrito Service', JSON.parse(localStorage.getItem('detalles')));
+      this._carritoService.detalles = JSON.parse(localStorage.getItem('detalles'));
+      console.log(this._carritoService.detalles);
     }
     if (jwtoken !== '') {
       const promise = this._configService.configurar(jwtoken).toPromise()
