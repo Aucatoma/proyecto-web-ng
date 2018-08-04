@@ -9,17 +9,16 @@ import {TarjetaCreditoService} from '../service/tarjeta-credito.service';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private _tarjetaService: TarjetaCreditoService
   ) {
     console.log('Constructor home');
   }
 
   ngOnInit() {
-    const tarjetas$ = this._tarjetaService.obtenerTarjetas();
+   /* const tarjetas$ = this._tarjetaService.obtenerTarjetas();
     tarjetas$.subscribe(
       value => console.log(value),
       error1 => console.log(error1)
-    );
+    );*/
   }
 
 }

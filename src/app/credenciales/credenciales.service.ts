@@ -48,7 +48,7 @@ export class CredencialesService {
         });
       return promise;
     } else {
-      return new Promise(resolve => {});
+      //return new Promise(resolve => {});
     }
   }
 
