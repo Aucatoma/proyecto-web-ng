@@ -23,23 +23,21 @@ export class CardBookComponent implements OnInit {
               private _carritoComprasService: CarritoComprasService) { }
 
   ngOnInit() {
-    this.textoBotonAgregarCarrito = 'Agregar al carrito: ' + '$' + this.libro.precio;
+    this.textoBotonAgregarCarrito = 'Añadir al carrito: $' + this.libro.precio;
   }
   emitirLibro() {
     this.libroEmit.emit(this.libro);
   }
   agregarAlCarrito(libro: Libro) {
-    if (this.estaAgregado === false) {
+    this.estaAgregado = this._carritoComprasService.agregarDetalle(new DetallePedido(1, libro));
+    if (this.estaAgregado === true) {
       this.textoBotonAgregarCarrito = 'Ir al carrito';
-      this._carritoComprasService.agregarDetalle(new DetallePedido(1, libro));
-      this.estaAgregado = true;
     } else {
-      this.textoBotonAgregarCarrito = 'Agregar al carrito: $' + libro.precio;
-      this.estaAgregado = false;
       this.irACarrito();
     }
   }
   irACarrito() {
+    this.textoBotonAgregarCarrito = 'Ir al carrito';
     this._router.navigate(['/carrito']);
   }
 }

@@ -89,6 +89,7 @@ export class CabeceraPedidoComponent implements OnInit {
           console.log(detalle);
           this._carritoComprasService.detalles = [];
           this.detallesAInsertar = [];
+          this._carritoComprasService.guardar();
           this.exito = 'Ir al catálogo';
           }, error1 => {console.log(error1); }
       );

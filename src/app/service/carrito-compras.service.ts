@@ -7,11 +7,16 @@ import {DetallePedido} from '../entidades/detalle-pedido';
 export class CarritoComprasService {
   detalles: DetallePedido[] = [];
   constructor() { }
-  agregarDetalle(detalle: DetallePedido) {
-    const index = this.detalles.findIndex(i => i.libro === detalle.libro);
-    console.log(index);
-    this.detalles.splice(this.detalles.length, 0, detalle);
-    localStorage.setItem('detalles', JSON.stringify(this.detalles));
+  agregarDetalle(detalle: DetallePedido): boolean {
+    if (!this.detalles.find(x => x.libro.id === detalle.libro.id)) {
+      this.detalles.splice(this.detalles.length, 0, detalle);
+      localStorage.setItem('detalles', JSON.stringify(this.detalles));
+      console.log('Se añadio al carrito: ');
+      console.log(detalle);
+      return true;
+    } else {
+      return false;
+    }
   }
 
   guardar() {
