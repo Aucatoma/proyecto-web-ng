@@ -8,7 +8,13 @@ export class CarritoComprasService {
   detalles: DetallePedido[] = [];
   constructor() { }
   agregarDetalle(detalle: DetallePedido) {
+    const index = this.detalles.findIndex(i => i.libro === detalle.libro);
+    console.log(index);
     this.detalles.splice(this.detalles.length, 0, detalle);
+    localStorage.setItem('detalles', JSON.stringify(this.detalles));
+  }
+
+  guardar() {
     localStorage.setItem('detalles', JSON.stringify(this.detalles));
   }
   quitarDetalle(detalle) {

@@ -34,6 +34,7 @@ export class DetallePedidoComponent implements OnInit, AfterViewInit {
     this.calcularCantidadYPrecioTotal();
     this.emitirCantidadTotalYPrecioTotal();
     this.detallesRecibidos = this._carritoComprasService.detalles;
+    this._carritoComprasService.guardar();
   }
   quitarDelCarrito(detalle: DetallePedido, libro: Libro) {
     this._carritoComprasService.quitarDetalle(detalle);

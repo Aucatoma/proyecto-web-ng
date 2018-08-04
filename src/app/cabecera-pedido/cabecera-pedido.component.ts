@@ -71,8 +71,8 @@ export class CabeceraPedidoComponent implements OnInit {
     cabeceraInsertada$.subscribe(
       value => {
         console.log('Cabecera insertada:');
-        this.cabeceraPedido.id = value.identifiers[0].id;
-        console.log(this.cabeceraPedido);
+        console.log(value);
+        this.cabeceraPedido.id = value.id;
          this.insertarDetalle();
       }, error1 => {console.log(error1); });
   }
