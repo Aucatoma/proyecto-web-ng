@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Usuario} from '../entidades/usuario';
 import {Credenciales} from '../entidades/credenciales';
 import {ConfigService} from '../service/config.service';
+import {CarritoComprasService} from '../service/carrito-compras.service';
 
 
 @Injectable({
@@ -13,7 +14,8 @@ export class CredencialesService {
   credenciales: Credenciales;
 
   constructor(
-    private _configService: ConfigService
+    private _configService: ConfigService,
+    private _carritoService: CarritoComprasService
   ) {
     console.log('CredencialesService', 'constructor');
 
@@ -35,6 +37,9 @@ export class CredencialesService {
 
   configurar(): Promise<any> {
     const jwtoken = this.getCookie('jwt');
+    if (localStorage.getItem('detalles') !== null) {
+      console.log(JSON.parse(localStorage.getItem('detalles')));
+    }
     if (jwtoken !== '') {
       const promise = this._configService.configurar(jwtoken).toPromise()
         .then(value => {
