@@ -1,16 +1,26 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Comentario} from '../entidades/comentario';
 import {Autor} from '../entidades/autor';
 import {ComentarioGet} from '../entidades/comentario-get';
+import {CredencialesService} from '../credenciales/credenciales.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ComentarioService {
   url = 'http://localhost:3000/comentario';
-  constructor(private _httpClient: HttpClient) { }
+  httpOptions = {};
+  constructor(private _httpClient: HttpClient,
+              private _credencialesService: CredencialesService) {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `${this._credencialesService.credenciales.jwt.token}`,
+        'Content-type': 'application/json',
+      })
+    };
+  }
 
   obtenerTodos(): Observable<Comentario[]> {
     return this._httpClient.get<Comentario[]>(this.url);
@@ -22,6 +32,6 @@ export class ComentarioService {
     return this._httpClient.get<ComentarioGet[]>(`${this.url}/libro/usuario/${id}`);
   }
   insertarComentario(comentario: Comentario): Observable<Comentario> {
-    return this._httpClient.post<Comentario>(`${this.url}`, comentario);
+    return this._httpClient.post<Comentario>(`${this.url}`, comentario, this.httpOptions);
   }
 }
