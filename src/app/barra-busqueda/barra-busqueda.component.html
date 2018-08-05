@@ -1,16 +1,5 @@
-
-      <div class="input-group-prepend">
-        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{filtro}}</button>
-        <div class="dropdown-menu">
-          <a (click)="changeNameOfDropDownFilter('Genero', $event)" class="dropdown-item mano">Genero</a>
-          <a (click)="changeNameOfDropDownFilter('Editorial', $event)" class="dropdown-item mano">Editorial</a>
-          <a (click)="changeNameOfDropDownFilter('Autor', $event)" class="dropdown-item mano">Autor</a>
-          <a (click)="changeNameOfDropDownFilter('Libro', $event)" class="dropdown-item mano">Libro</a>
-        </div>
-      </div>
-
       <div class="dropdown">
-        <input (keyup)="onKey($event)" id="busqueda" name="busqueda" class="form-control" type="text" placeholder="Search" [value]="textoABuscar" aria-label="Recipient" style="width: 477px">
+        <input (click)="mostrarEsconderBarra()" (keyup)="onKey($event)" id="busqueda" name="busqueda" class="form-control" type="text" placeholder="Search" [value]="textoABuscar" aria-label="Recipient" style="width: 477px">
         <div id="dropDownSearchContent" class="dropdown-menu" style="width: 477px" >
           <ul *ngIf="libros?.length !== 0; else sinResultados" class="list-group list-group-flush">
             <li *ngFor="let libro of libros"

@@ -4,7 +4,7 @@ import {LibroService} from '../service/libro.service';
 import {Libro} from '../entidades/libro';
 import {ComentarioService} from '../service/comentario.service';
 import {Comentario} from '../entidades/comentario';
-
+declare var $: any;
 @Component({
   selector: 'app-catalogo',
   templateUrl: './catalogo.component.html',
@@ -13,6 +13,7 @@ import {Comentario} from '../entidades/comentario';
 export class CatalogoComponent implements OnInit {
 
   libros: Libro[];
+  isVisible: boolean;
 
   constructor(
     private _router: Router,
@@ -31,6 +32,9 @@ export class CatalogoComponent implements OnInit {
   irADetalle(libro) {
     this._router.navigate(['/detalle', `${libro.id}`]);
   }
+  guardarIsVisible(isVisible) {
+    this.isVisible = isVisible;
+  }
   buscarLibros(evento) {
     if (evento.filtro === 'Libro') {
       console.log(evento.texto);
@@ -38,6 +42,11 @@ export class CatalogoComponent implements OnInit {
       libros$.subscribe(value => {
         this.libros = value;
       }, error1 => console.log(error1));
+    }
+  }
+  mostrarEsconderBarra() {
+    if (this.isVisible === true) {
+      $('app-barra-busqueda > div.dropdown > div#dropDownSearchContent').removeClass('show');
     }
   }
 }

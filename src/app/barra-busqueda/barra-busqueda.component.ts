@@ -14,7 +14,8 @@ export class BarraBusquedaComponent implements OnInit, AfterViewInit {
   libros: Libro[];
   textoABuscar = '';
   filtro = 'Libro';
-
+  isVisible = false;
+  @Output() isVisibleEmit = new EventEmitter();
   @Output() textoEmit = new EventEmitter();
   @HostBinding('attr.class') clase = 'col-sm-8 input-group mb-3 text-center';
   constructor(private _libroService: LibroService) {}
@@ -67,12 +68,15 @@ export class BarraBusquedaComponent implements OnInit, AfterViewInit {
     this.libros = [];
     document.getElementById('dropDownSearchContent').classList.remove('show');
   }
-  changeNameOfDropDownFilter(filtro: string, evento) {
-    evento.preventDefault();
-    this.filtro = filtro;
-    document.getElementById('dropDownSearchContent').classList.remove('show');
+  mostrarEsconderBarra() {
+    if (this.isVisible === false) {
+      document.getElementById('dropDownSearchContent').classList.add('show');
+      this.isVisible = true;
+      this.isVisibleEmit.emit(this.isVisible);
+    } else {
+      document.getElementById('dropDownSearchContent').classList.remove('show');
+      this.isVisible = false;
+      this.isVisibleEmit.emit(this.isVisible);
+    }
   }
-
-
-
 }
