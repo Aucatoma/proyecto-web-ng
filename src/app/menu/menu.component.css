@@ -25,8 +25,9 @@
   color: #77a5ff !important;
 }
 
-.nav-link > img:hover {
-  color: #77a5ff !important;
+.nav-link:hover > img {
+  border: #77a5ff solid 0.5ex;
+  border-radius: 1ex;
 }
 
 .navbar-brand {

@@ -18,16 +18,18 @@ export class TarjetaCreditoService {
     private _httpClient: HttpClient,
     private _credencialesService: CredencialesService,
   ) {
-    this.httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': `${this._credencialesService.credenciales.jwt.token}`,
-        'Content-type': 'application/json',
-      })
-    };
+    if(this._credencialesService.estaLogeado){
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': `${this._credencialesService.credenciales.jwt.token}`,
+          'Content-type': 'application/json',
+        })
+      };
+    }
   }
 
   obtenerTarjetas(): Observable<TarjetaCredito[]> {
-      return this._httpClient.get<TarjetaCredito[]>(this.url, this.httpOptions);
+    return this._httpClient.get<TarjetaCredito[]>(this.url, this.httpOptions);
   }
 
   crearTarjeta(tarjeta: TarjetaCredito): Observable<TarjetaCredito> {
