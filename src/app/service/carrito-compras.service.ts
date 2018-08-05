@@ -22,6 +22,10 @@ export class CarritoComprasService {
   guardar() {
     localStorage.setItem('detalles', JSON.stringify(this.detalles));
   }
+  borrar(){
+    localStorage.removeItem('detalles');
+  }
+
   quitarDetalle(detalle) {
     this.detalles.splice(this.detalles.findIndex(i => i === detalle), 1);
     localStorage.setItem('detalles', JSON.stringify(this.detalles));

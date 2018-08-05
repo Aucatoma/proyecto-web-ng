@@ -32,6 +32,7 @@ export class CredencialesService {
   logout() {
     this.credenciales = undefined;
     this.estaLogeado = false;
+    this._carritoService.borrar();
     document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
   }
 
