@@ -57,6 +57,7 @@ export class BarraBusquedaComponent implements OnInit, AfterViewInit {
 
   ubicarTexto(texto) {
     console.log(texto);
+    this.textoABuscar = texto;
     $('#busqueda').val(texto);
   }
 

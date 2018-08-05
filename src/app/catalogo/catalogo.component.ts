@@ -33,6 +33,7 @@ export class CatalogoComponent implements OnInit {
   }
   buscarLibros(evento) {
     if (evento.filtro === 'Libro') {
+      console.log(evento.texto);
       const libros$ = this._libroService.obtenerLike(evento.texto);
       libros$.subscribe(value => {
         this.libros = value;
