@@ -8,6 +8,8 @@ import {DetallePedidoService} from '../service/detalle-pedido.service';
 import {Router} from '@angular/router';
 import {TarjetaCreditoService} from '../service/tarjeta-credito.service';
 import {TarjetaCredito} from '../entidades/tarjeta-credito';
+import {UsuarioTarjeta} from '../entidades/usuario-tarjeta';
+import {UsuarioTarjetaService} from '../service/usuario-tarjeta.service';
 declare var $;
 
 @Component({
@@ -23,6 +25,7 @@ export class CabeceraPedidoComponent implements OnInit {
   numeroCabecera = '';
   numeroTarjeta = '';
   tipoTarjeta = '';
+  idTarjetaEscogida = 0;
   cabeceraPedido = new CabeceraPedidoPost();
   detallesAInsertar: DetallePost[] = [];
   tarjetasCreditoUsuario: TarjetaCredito[] = [];
@@ -33,7 +36,8 @@ export class CabeceraPedidoComponent implements OnInit {
               private _credencialesService: CredencialesService,
               private _cabeceraService: CabeceraService,
               private _detalleService: DetallePedidoService,
-              private _tarjetaCreditoService: TarjetaCreditoService) {
+              private _tarjetaCreditoService: TarjetaCreditoService,
+              private _usuarioTarjetaService: UsuarioTarjetaService) {
 
   }
   ngOnInit() {
@@ -42,27 +46,31 @@ export class CabeceraPedidoComponent implements OnInit {
   }
   registrarPedido() {
     if (this._credencialesService.credenciales !== undefined) {
-      if (this.cantidadTotal !== 0) {
+      if (this.idTarjetaEscogida === 0) {
+        this.error = 'Por favor, seleccione una tarjeta de crédito';
+      } else if (this.cantidadTotal === 0) {
+        this.error = 'Por favor, seleccione al menos un libro';
+      } else {
         this.generarFecha();
         this.generarNumero();
-        this.cabeceraPedido.numero = this.numeroCabecera;
-        this.cabeceraPedido.fecha = this.fechaCabecera;
-        this.cabeceraPedido.iva = 12;
-        this.cabeceraPedido.usuarioTarjeta = 1;
-        this.error = undefined;
-        this.insertarCabecera();
-      } else {
-        this.error = 'Por favor, seleccione al menos un libro';
+        const usuarioTarjeta$ = this._usuarioTarjetaService.obtenerPorUsuarioTarjetaId(this._credencialesService.credenciales.usuario.id, this.idTarjetaEscogida);
+        usuarioTarjeta$.subscribe(
+          value => {
+            this.cabeceraPedido.usuarioTarjeta = value.id;
+            this.cabeceraPedido.numero = this.numeroCabecera;
+            this.cabeceraPedido.fecha = this.fechaCabecera;
+            this.cabeceraPedido.iva = 12;
+            this.error = undefined;
+            console.log(JSON.stringify(this.cabeceraPedido));
+            this.insertarCabecera();
+          }, error1 => {console.log(error1); });
       }
-
     } else {
       this.error = 'Necesita iniciar sesión o registrarse para comprar';
     }
-
   }
   generarFecha() {
     this.fechaCabecera = new Date().toLocaleDateString('en-US');
-    // console.log('FECHA PEDIDO: ' + this.fechaCabecera);
   }
   generarNumero() {
     const dia = new Date().getDay().toString();
@@ -73,7 +81,6 @@ export class CabeceraPedidoComponent implements OnInit {
     const segundos = new Date().getSeconds().toLocaleString();
     this.numeroCabecera = anio + mes + dia + hora + minuto + segundos;
   }
-
   insertarCabecera() {
     const cabeceraInsertada$ = this._cabeceraService.insertarCabecera(this.cabeceraPedido);
     cabeceraInsertada$.subscribe(
@@ -84,7 +91,6 @@ export class CabeceraPedidoComponent implements OnInit {
          this.insertarDetalle();
       }, error1 => {console.log(error1); });
   }
-
   private insertarDetalle() {
     for (const detalle of this._carritoComprasService.detalles) {
       this.detallesAInsertar.splice(this.detallesAInsertar.length, 0, new DetallePost(detalle.cantidad, this.cabeceraPedido.id, detalle.libro.id));
@@ -95,6 +101,8 @@ export class CabeceraPedidoComponent implements OnInit {
         value => {
           console.log('Detalle insertado: ');
           console.log(detalle);
+          this._carritoComprasService.detalles = [];
+          this._carritoComprasService.guardar();
           this.exito = 'Ir al catálogo';
           }, error1 => {console.log(error1); }
       );
