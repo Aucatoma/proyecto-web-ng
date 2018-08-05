@@ -21,12 +21,14 @@ export class UsuarioService {
     private _httpClient: HttpClient,
     private readonly _credencialesService: CredencialesService,
   ) {
-    this.httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization':  `${this._credencialesService.credenciales.jwt.token}`,
-        'Content-Type': 'application/json'
-      })
-    };
+    if(this._credencialesService.estaLogeado){
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization':  `${this._credencialesService.credenciales.jwt.token}`,
+          'Content-Type': 'application/json'
+        })
+      };
+    }
   }
 
   obtenerUsuario(jwt): Observable<Usuario> {
@@ -38,6 +40,11 @@ export class UsuarioService {
   }
 
   registrar(usuario: UsuarioEdicion): Observable<Credenciales> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
     return this._httpClient.post<Credenciales>(this.urlRegistro, JSON.stringify(usuario), this.httpOptions);
   }
 

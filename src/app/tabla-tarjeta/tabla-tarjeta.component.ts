@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {TarjetaCredito} from '../entidades/tarjeta-credito';
-
+declare var $;
 @Component({
   selector: 'app-tabla-tarjeta',
   templateUrl: './tabla-tarjeta.component.html',
@@ -11,6 +11,7 @@ export class TablaTarjetaComponent implements OnInit, AfterViewInit, OnChanges {
 
   @Input() tarjetasRecv: TarjetaCredito[];
   @Output() tarjetaOutput = new EventEmitter<TarjetaCredito>();
+  @Output() tarjetaEliminar = new EventEmitter();
   tarjetas: TarjetaCredito[];
   indicePaginacion = Array();
   liActive: HTMLElement;
@@ -21,14 +22,17 @@ export class TablaTarjetaComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes');
+    this.indicePaginacion = Array();
+    for (let i = 0; i < this.tarjetasRecv.length / 2 ; i++) {
+      this.indicePaginacion.push(i + 1);
+    }
   }
 
 
   ngOnInit() {
-    for (let i = 0; i < this.tarjetasRecv.length / 2 ; i++) {
+    /*for (let i = 0; i < this.tarjetasRecv.length / 2 ; i++) {
       this.indicePaginacion.push(i + 1);
-    }
+    }*/
     this.tarjetas = this.tarjetasRecv.slice(this.current, this.end);
   }
 
@@ -36,6 +40,7 @@ export class TablaTarjetaComponent implements OnInit, AfterViewInit, OnChanges {
     this.liActive = document.getElementById((this.end / 2) + '');
     this.liActive.classList.add('active');
     document.getElementById('prev').classList.add('disabled');
+
   }
 
 
@@ -45,7 +50,7 @@ export class TablaTarjetaComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   tomarAnteriores(evento) {
-    console.log('Anteriores')
+    console.log('Anteriores');
     evento.preventDefault();
     if ((this.current - 2) >= 0 ) {
       document.getElementById('next').classList.remove('disabled');
@@ -62,12 +67,12 @@ export class TablaTarjetaComponent implements OnInit, AfterViewInit, OnChanges {
       this.liActive.classList.add('active');
       this.tarjetas = this.tarjetasRecv.slice(this.current, this.end);
     } else {
-        document.getElementById('prev').classList.add('disabled');
-      }
+      document.getElementById('prev').classList.add('disabled');
+    }
   }
 
   tomarSiguientes(evento) {
-    console.log('siguientes')
+    console.log('siguientes');
     evento.preventDefault();
     if ((this.end + 2) <= this.tarjetasRecv.length || (this.end + 1) <=  this.tarjetasRecv.length) {
       document.getElementById('prev').classList.remove('disabled');
@@ -90,34 +95,33 @@ export class TablaTarjetaComponent implements OnInit, AfterViewInit, OnChanges {
 
   tomarPorIndice(indice, evento, li) {
     evento.preventDefault();
-    if(this.liActive !== undefined) {
+    if (this.liActive !== undefined) {
       this.liActive.classList.remove('active');
-    }
-    this.liActive = li;
-    li.classList.add('active');
-    console.log('#', indice % 2);
-    if ((indice % 2) !== 0 && indice < 2) {
-      this.current = indice - 1;
-    } else if ((indice % 2) !== 0 && indice > 2) {
-      this.current = indice + 1;
+      this.liActive = li;
+      li.classList.add('active');
     } else {
-      this.current = indice;
+      this.liActive = li;
+      li.classList.add('active');
     }
-    this.end = indice * 2;
-    if (this.current === 0) {
-      console.log('cero');
-      document.getElementById('prev').classList.add('disabled');
+    this.current = (indice * 2) - 2;
+    this.end = this.current + 2;
+
+    if (this.end >= (this.tarjetasRecv.length - 1) ) {
+      document.getElementById('next').classList.add('disabled');
     } else {
       document.getElementById('next').classList.remove('disabled');
     }
-    if (this.end >= this.tarjetasRecv.length) {
-      console.log('último');
-      document.getElementById('next').classList.add('disabled');
+    if (this.current === 0) {
+      document.getElementById('prev').classList.add('disabled');
     } else {
       document.getElementById('prev').classList.remove('disabled');
     }
     console.log(this.current, this.end);
     this.tarjetas = this.tarjetasRecv.slice(this.current, this.end);
+  }
+
+  eliminar(indice, tarjeta) {
+    this.tarjetaEliminar.emit({indice, tarjeta});
   }
 
 }

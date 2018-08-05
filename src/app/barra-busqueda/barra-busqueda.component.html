@@ -10,7 +10,7 @@
       </div>
 
       <div class="dropdown">
-        <input (keyup)="onKey($event)" class="form-control" type="text" placeholder="Search" [value]="textoABuscar" aria-label="Recipient" style="width: 477px">
+        <input (keyup)="onKey($event)" id="busqueda" name="busqueda" class="form-control" type="text" placeholder="Search" [value]="textoABuscar" aria-label="Recipient" style="width: 477px">
         <div id="dropDownSearchContent" class="dropdown-menu" style="width: 477px" >
           <ul *ngIf="libros?.length !== 0; else sinResultados" class="list-group list-group-flush">
             <li *ngFor="let libro of libros"
@@ -34,7 +34,9 @@
           </ng-template>
         </div>
       </div>
-
+      <div class="input-group-append">
+        <app-speech-text (textoEmit)="ubicarTexto($event)"></app-speech-text>
+      </div>
       <div class="input-group-append">
         <button (click)="emitirTexto()" class="btn btn-outline-secondary" type="button">Buscar</button>
       </div>

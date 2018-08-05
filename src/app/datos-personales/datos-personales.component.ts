@@ -43,6 +43,7 @@ export class DatosPersonalesComponent implements OnInit, DoCheck {
   }
 
   emitirUsuario(form) {
+    if (form.dirty) {
       const nombre = form.controls.nombre.value;
       const apellido = form.controls.apellido.value;
       const username = form.controls.username.value;
@@ -58,21 +59,22 @@ export class DatosPersonalesComponent implements OnInit, DoCheck {
         imagen: 'na',
         extension: ''
       };
-    if (this.usuario.id !== 0) {
-      usuario['id'] = this.usuario.id;
-      console.log(usuario['id']);
-      if (form.controls.imagen.dirty) {
+      if (this.usuario.id !== 0) {
+        usuario['id'] = this.usuario.id;
+        console.log(usuario['id']);
+        if (form.controls.imagen.dirty) {
+          usuario.imagen = this.usuario.imagenUrl.split(',')[1];
+          usuario.extension = this.usuario.imagenUrl.split(',')[0].split('/')[1].split(';')[0];
+          this.usuarioEmit.emit(usuario);
+        } else {
+          usuario.extension = this.usuario.imagenUrl.split('.')[1];
+          this.usuarioEmit.emit(usuario);
+        }
+      } else {
         usuario.imagen = this.usuario.imagenUrl.split(',')[1];
         usuario.extension = this.usuario.imagenUrl.split(',')[0].split('/')[1].split(';')[0];
         this.usuarioEmit.emit(usuario);
-      } else {
-        usuario.extension = this.usuario.imagenUrl.split('.')[1];
-        this.usuarioEmit.emit(usuario);
       }
-    } else {
-      usuario.imagen = this.usuario.imagenUrl.split(',')[1];
-      usuario.extension = this.usuario.imagenUrl.split(',')[0].split('/')[1].split(';')[0];
-      this.usuarioEmit.emit(usuario);
     }
   }
 

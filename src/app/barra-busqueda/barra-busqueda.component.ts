@@ -55,6 +55,11 @@ export class BarraBusquedaComponent implements OnInit, AfterViewInit {
     );
   }
 
+  ubicarTexto(texto) {
+    console.log(texto);
+    $('#busqueda').val(texto);
+  }
+
   fillSearchBar(evento, nombreLibro: string) {
     evento.preventDefault();
     this.textoABuscar = nombreLibro;

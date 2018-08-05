@@ -60,6 +60,7 @@ export class CuentaComponent implements OnInit {
 
   mostrarEdicion(tarjeta) {
     this.tarjetaSeleccionada = tarjeta;
+    this.crearTarjeta = false;
     console.log('clic');
   }
 
@@ -72,7 +73,10 @@ export class CuentaComponent implements OnInit {
     console.log(tarjeta);
     const tarjeta$ = this._tarjetaService.crearTarjeta(tarjeta);
     tarjeta$.subscribe(value => {
-        this.tarjetas.push(value);
+        const tarjetas = this.tarjetas.map(value1 => { return value1; });
+        tarjetas.push(value);
+        this.tarjetas = tarjetas;
+        this.crearTarjeta = false;
       }, error1 => console.log(error1));
   }
 
@@ -83,9 +87,28 @@ export class CuentaComponent implements OnInit {
         if (value1.id === value.id) {
             return value;
         }
+        return value1;
       });
+      this.tarjetaSeleccionada = undefined;
     });
     console.log(this.tarjetas);
+  }
+  eliminarTarjeta(evento){
+    const id = evento.tarjeta.id;
+    const eliminacion$ = this._tarjetaService.eliminarTarjeta(id);
+    eliminacion$.subscribe(
+      value => {
+        location.reload();
+        },
+      error1 => console.log(error1)
+    );
+    location.reload();
+    //this.tarjetas.push({ id: 1, numero: '', anio: 12, mes: 1, codigo: '', tipo: ''});
+    //const tarjetas = this.tarjetas.map(value => { return value; });
+    //tarjetas.splice(evento.indice - 1, 1);
+    //this.tarjetas = tarjetas;
+    /*this.tarjetas.splice(evento.indice - 1, 1);
+    console.log(this.tarjetas);*/
   }
 
 }

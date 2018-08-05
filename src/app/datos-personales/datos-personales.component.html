@@ -41,6 +41,6 @@
   </div>
   <div class="form-row justify-content-center">
     <button type="submit" *ngIf="usuario.id === 0" class="btn btn-primary">Registrarme</button>
-    <button type="submit" *ngIf="usuario.id !== 0" class="btn btn-primary">Actualizar</button>
+    <button type="submit" *ngIf="usuario.id !== 0" class="btn btn-primary" [attr.disabled]="f.dirty ? null : '' ">Actualizar</button>
   </div>
 </form>

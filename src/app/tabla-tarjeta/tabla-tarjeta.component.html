@@ -1,4 +1,4 @@
-<table class="table table-hover">
+<table class="table table-hover" style="z-index: -1;">
   <thead>
   <tr>
     <th scope="col">#</th>
@@ -6,6 +6,7 @@
     <th scope="col">Número</th>
     <th scope="col">CVV</th>
     <th scope="col">Fecha de vencimiento</th>
+    <th scope="col"></th>
   </tr>
   </thead>
   <tbody>
@@ -15,6 +16,8 @@
     <td>{{tarjeta.numero}}</td>
     <td>{{tarjeta.codigo}}</td>
     <td>{{tarjeta.mes | mes}}/{{tarjeta.anio}}</td>
+    <td><img src="assets/icon/eliminar.png" alt="" height="40" width="40" (click)="eliminar(current + indice + 1, tarjeta)">
+      </td>
   </tr>
   </tbody>
 </table>

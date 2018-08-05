@@ -35,7 +35,7 @@
     </div>
   </div>
   <div class="form-row justify-content-center">
-    <button *ngIf="tarjeta.id != 0" type="submit" class="btn btn-primary">Actualizar</button>
-    <button *ngIf="tarjeta.id == 0" type="submit" class="btn btn-primary">Añadir</button>
+    <button *ngIf="tarjeta.id != 0" type="submit" class="btn btn-primary" [attr.disabled]="f.dirty ? null : ''">Actualizar</button>
+    <button *ngIf="tarjeta.id == 0" type="submit" class="btn btn-primary" [attr.disabled]="f.dirty ? null : ''">Añadir</button>
   </div>
 </form>
