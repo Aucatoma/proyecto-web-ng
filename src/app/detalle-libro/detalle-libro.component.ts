@@ -27,6 +27,7 @@ export class DetalleLibroComponent implements OnInit {
   @Input() comentarios: ComentarioGet[];
   @HostBinding('attr.class') clase = 'row';
   puntuacionUsuario = 0;
+  puntuacionLibro = 0;
   comentarioUsuario = '';
   textoBotonAgregarCarrito = '';
   estaAgregado = false;
@@ -44,6 +45,7 @@ export class DetalleLibroComponent implements OnInit {
 
   ngOnInit() {
     this.textoBotonAgregarCarrito = 'Agregar al carrito: ' + '$' + this.libro.precio;
+    this.calcularPuntuacionLibro();
   }
   guardarPuntuacionEmitida(puntuacionUsuario) {
     this.puntuacionUsuario = puntuacionUsuario;
@@ -79,28 +81,26 @@ export class DetalleLibroComponent implements OnInit {
       this.comentarios.splice(this.comentarios.length, 0, this.comentarioInsertado);
       console.log('Comentario insertado');
       console.log(this.nuevoComentario);
+      this.calcularPuntuacionLibro();
       this.error = undefined;
     }, error1 => { console.log(error1); });
   }
   calcularPuntuacionLibro() {
-    let total = 0;
+    this.puntuacionLibro = 0;
     if (this.comentarios.length !== 0) {
       for (const comentario of this.comentarios) {
-        total = comentario.puntuacionLibro + total;
+        this.puntuacionLibro = comentario.puntuacionLibro + this.puntuacionLibro;
       }
-      this.libro.puntuacion = total;
+      this.puntuacionLibro = Math.round(this.puntuacionLibro / this.comentarios.length);
     } else {
-      return 0;
+      this.puntuacionLibro = 0;
     }
   }
   agregarAlCarrito(libro: Libro) {
-    if (this.estaAgregado === false) {
+    this.estaAgregado = this._carritoComprasService.agregarDetalle(new DetallePedido(1, libro));
+    if (this.estaAgregado === true) {
       this.textoBotonAgregarCarrito = 'Ir al carrito';
-      this._carritoComprasService.agregarDetalle(new DetallePedido(1, libro));
-      this.estaAgregado = true;
     } else {
-      this.textoBotonAgregarCarrito = 'Agregar al carrito: $' + libro.precio;
-      this.estaAgregado = false;
       this.irACarrito();
     }
   }

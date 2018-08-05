@@ -6,6 +6,8 @@ import {CabeceraService} from '../service/cabecera.service';
 import {DetallePost} from '../entidades/detalle-post';
 import {DetallePedidoService} from '../service/detalle-pedido.service';
 import {Router} from '@angular/router';
+import {TarjetaCreditoService} from '../service/tarjeta-credito.service';
+import {TarjetaCredito} from '../entidades/tarjeta-credito';
 declare var $;
 
 @Component({
@@ -19,18 +21,24 @@ export class CabeceraPedidoComponent implements OnInit {
   @Input() precioFinal;
   fechaCabecera = '';
   numeroCabecera = '';
+  numeroTarjeta = '';
+  tipoTarjeta = '';
   cabeceraPedido = new CabeceraPedidoPost();
   detallesAInsertar: DetallePost[] = [];
+  tarjetasCreditoUsuario: TarjetaCredito[] = [];
   error = undefined;
   exito = undefined;
   constructor(private _router: Router,
               private _carritoComprasService: CarritoComprasService,
               private _credencialesService: CredencialesService,
               private _cabeceraService: CabeceraService,
-              private _detalleService: DetallePedidoService) {
+              private _detalleService: DetallePedidoService,
+              private _tarjetaCreditoService: TarjetaCreditoService) {
 
   }
   ngOnInit() {
+    this.numeroTarjeta = 'Elija su tarjeta';
+    this.obtenerTarjetas();
   }
   registrarPedido() {
     if (this._credencialesService.credenciales !== undefined) {
@@ -87,8 +95,6 @@ export class CabeceraPedidoComponent implements OnInit {
         value => {
           console.log('Detalle insertado: ');
           console.log(detalle);
-          this._carritoComprasService.detalles = [];
-          this.detallesAInsertar = [];
           this.exito = 'Ir al catálogo';
           }, error1 => {console.log(error1); }
       );
@@ -96,5 +102,14 @@ export class CabeceraPedidoComponent implements OnInit {
   }
   irAlCatalogo () {
     this._router.navigate(['/catalogo']);
+  }
+  obtenerTarjetas() {
+    const tarjetas$ = this._tarjetaCreditoService.obtenerTarjetas();
+    tarjetas$.subscribe(
+      value => {
+        this.tarjetasCreditoUsuario = value;
+      },
+      error1 => {console.log(error1); }
+    );
   }
 }

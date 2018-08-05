@@ -25,11 +25,44 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
+
+    <div class="row">
+      <div class="col" style="padding-top: 15px; padding-left: 65px">
+        <h3>Método de Pago</h3>
+      </div>
+    </div>
+
     <div class="row text-center">
-      <div *ngIf="!exito" class="col" style="padding-top: 15px; padding-bottom: 20px">
+      <div class="col-2" style="padding-top: 20px; padding-bottom: 20px; padding-left: 20px">
+        <h5>Tarjetas:</h5>
+      </div>
+      <div class="col-3" style="padding-top: 15px; padding-bottom: 20px">
+        <div class="dropdown">
+          <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">
+            {{numeroTarjeta}}
+            <span class="badge badge-pill">
+                  <img *ngIf="tipoTarjeta === 'Mastercard'" src="assets/icon/mastercard.png" alt="tipo" style="height: 17px; width: 22px">
+                  <img *ngIf="tipoTarjeta === 'Visa'" src="assets/icon/visa.png" alt="tipo" style="height: 17px; width: 22px">
+                  <img *ngIf="tipoTarjeta === 'American Express'" src="assets/icon/american-express.png" alt="tipo" style="height: 17px; width: 22px">
+                </span>
+          </button>
+          <div class="dropdown-menu">
+            <ul class="list-group list-group-flush">
+              <li *ngFor="let tarjetaCredito of tarjetasCreditoUsuario" (click)="tipoTarjeta = tarjetaCredito.tipo; numeroTarjeta = tarjetaCredito.numero" class="list-group-item d-flex justify-content-between align-items-center mano">
+                {{tarjetaCredito.numero}}
+                <span class="badge badge-pill">
+                  <img *ngIf="tarjetaCredito.tipo === 'Mastercard'" src="assets/icon/mastercard.png" alt="tipo" style="height: 17px; width: 22px">
+                  <img *ngIf="tarjetaCredito.tipo === 'Visa'" src="assets/icon/visa.png" alt="tipo" style="height: 17px; width: 22px">
+                  <img *ngIf="tarjetaCredito.tipo === 'American Express'" src="assets/icon/american-express.png" alt="tipo" style="height: 17px; width: 22px">
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!exito" class="col-7" style="padding-top: 15px; padding-bottom: 20px">
         <button (click)="registrarPedido()" class="btn btn-primary">Comprar</button>
         <p *ngIf = "error" style="color: red">{{error}}</p>
       </div>

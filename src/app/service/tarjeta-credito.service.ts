@@ -3,7 +3,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {CredencialesService} from '../credenciales/credenciales.service';
 import {TarjetaCredito} from '../entidades/tarjeta-credito';
-import {ConfigService} from '../service/config.service';
 
 @Injectable({
   providedIn: 'root'
