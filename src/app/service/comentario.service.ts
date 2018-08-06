@@ -14,12 +14,20 @@ export class ComentarioService {
   httpOptions = {};
   constructor(private _httpClient: HttpClient,
               private _credencialesService: CredencialesService) {
+    if (this._credencialesService.estaLogeado){
     this.httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `${this._credencialesService.credenciales.jwt.token}`,
         'Content-type': 'application/json',
       })
     };
+    } else {
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          'Content-type': 'application/json',
+        })
+      };
+    }
   }
 
   obtenerTodos(): Observable<Comentario[]> {
@@ -32,6 +40,12 @@ export class ComentarioService {
     return this._httpClient.get<ComentarioGet[]>(`${this.url}/libro/usuario/${id}`);
   }
   insertarComentario(comentario: Comentario): Observable<Comentario> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `${this._credencialesService.credenciales.jwt.token}`,
+        'Content-type': 'application/json',
+      })
+    };
     return this._httpClient.post<Comentario>(`${this.url}`, comentario, this.httpOptions);
   }
 }

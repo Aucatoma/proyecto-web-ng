@@ -12,14 +12,22 @@ export class CabeceraService {
   httpOptions = {};
   constructor(private _httpClient: HttpClient,
               private _credencialesService: CredencialesService) {
+    if (this._credencialesService.estaLogeado) {
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': `${this._credencialesService.credenciales.jwt.token}`,
+          'Content-type': 'application/json',
+        })
+      };
+    }
+  }
+  insertarCabecera(cabecera: CabeceraPedidoPost): Observable<CabeceraPedidoPost> {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `${this._credencialesService.credenciales.jwt.token}`,
         'Content-type': 'application/json',
       })
     };
-  }
-  insertarCabecera(cabecera: CabeceraPedidoPost): Observable<CabeceraPedidoPost> {
     return this._httpClient.post<CabeceraPedidoPost>(`${this.url}`, cabecera, this.httpOptions);
   }
 }

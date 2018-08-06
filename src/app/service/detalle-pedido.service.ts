@@ -12,14 +12,22 @@ export class DetallePedidoService {
   httpOptions = {};
   constructor(private _httpClient: HttpClient,
               private _credencialesService: CredencialesService) {
+    if(this._credencialesService.estaLogeado){
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': `${this._credencialesService.credenciales.jwt.token}`,
+          'Content-type': 'application/json',
+        })
+      };
+    }
+  }
+  insertarDetalle(detalle: DetallePost): Observable<DetallePost> {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `${this._credencialesService.credenciales.jwt.token}`,
         'Content-type': 'application/json',
       })
     };
-  }
-  insertarDetalle(detalle: DetallePost): Observable<DetallePost> {
     return this._httpClient.post<DetallePost>(`${this.url}`, detalle, this.httpOptions);
   }
 }

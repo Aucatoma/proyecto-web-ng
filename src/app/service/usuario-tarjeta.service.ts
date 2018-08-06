@@ -13,14 +13,22 @@ export class UsuarioTarjetaService {
 
   constructor(private _httpClient: HttpClient,
               private _credencialesService: CredencialesService) {
+    if(this._credencialesService.estaLogeado){
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          'Authorization': `${this._credencialesService.credenciales.jwt.token}`,
+          'Content-type': 'application/json',
+        })
+      };
+    }
+  }
+  obtenerPorUsuarioTarjetaId(usuarioId, tarjetaId): Observable<UsuarioTarjeta> {
     this.httpOptions = {
       headers: new HttpHeaders({
         'Authorization': `${this._credencialesService.credenciales.jwt.token}`,
         'Content-type': 'application/json',
       })
     };
-  }
-  obtenerPorUsuarioTarjetaId(usuarioId, tarjetaId): Observable<UsuarioTarjeta> {
     return this._httpClient.get<UsuarioTarjeta>(`${this.url}/?usuarioId=${usuarioId}&tarjetaId=${tarjetaId}`);
   }
 }
