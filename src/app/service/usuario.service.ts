@@ -32,10 +32,22 @@ export class UsuarioService {
   }
 
   obtenerUsuario(jwt): Observable<Usuario> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `${this._credencialesService.credenciales.jwt.token}`,
+        'Content-type': 'application/json',
+      })
+    };
     return this._httpClient.get<Usuario>(this.urlUsuario, this.httpOptions);
   }
 
   editarUsuario(usuario: Usuario): Observable<Usuario> {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `${this._credencialesService.credenciales.jwt.token}`,
+        'Content-type': 'application/json',
+      })
+    };
     return this._httpClient.put<Usuario>(`${this.urlUsuario}/${usuario.id}`, JSON.stringify(usuario), this.httpOptions);
   }
 

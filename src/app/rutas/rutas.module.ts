@@ -8,14 +8,16 @@ import {CatalogoComponent} from '../catalogo/catalogo.component';
 import {CuentaComponent} from '../cuenta/cuenta.component';
 import {DetalleComponent} from '../detalle/detalle.component';
 import {CarritoComprasComponent} from '../carrito-compras/carrito-compras.component';
+import {AuthGuard} from '../auth.guard';
+import {LoggedGuard} from '../logged.guard';
 
 const rutas: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [LoggedGuard] },
   { path: 'home', component: HomeComponent },
   { path: 'registro', component: RegistroComponent },
   { path: 'catalogo', component: CatalogoComponent },
-  { path: 'cuenta', component: CuentaComponent},
+  { path: 'cuenta', component: CuentaComponent, canActivate: [AuthGuard]},
   { path: 'catalogo', component: CatalogoComponent },
   { path: 'detalle/:id', component: DetalleComponent},
   { path: 'carrito', component: CarritoComprasComponent}
