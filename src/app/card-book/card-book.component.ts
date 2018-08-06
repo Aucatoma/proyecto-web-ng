@@ -68,9 +68,5 @@ export class CardBookComponent implements OnInit, AfterViewInit {
       this.puntuacionLibro = 0;
     }
     console.log(this.puntuacionLibro);
-    $('.ui.rating').rating({
-      maxRating: 5,
-    });
-    $('.ui.rating').rating('disable');
   }
 }
