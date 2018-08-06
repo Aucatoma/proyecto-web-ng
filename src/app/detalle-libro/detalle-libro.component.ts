@@ -12,7 +12,6 @@ import {ComentarioGet} from '../entidades/comentario-get';
 import {CarritoComprasService} from '../service/carrito-compras.service';
 import {Router} from '@angular/router';
 import {DetallePedido} from '../entidades/detalle-pedido';
-declare var $;
 @Component({
   selector: 'app-detalle-libro',
   templateUrl: './detalle-libro.component.html',
@@ -41,7 +40,7 @@ export class DetalleLibroComponent implements OnInit {
     private _comentarioService: ComentarioService,
     private _errorHandlerService: ErrorHandlerService,
     private _credencialesService: CredencialesService,
-    private _carritoComprasService: CarritoComprasService) {}
+    private _carritoComprasService: CarritoComprasService ) {}
 
   ngOnInit() {
     this.textoBotonAgregarCarrito = 'Agregar al carrito: ' + '$' + this.libro.precio;
@@ -72,13 +71,14 @@ export class DetalleLibroComponent implements OnInit {
   insertarComentario () {
     const comentarioInsertado$ = this._comentarioService.insertarComentario(this.nuevoComentario);
     comentarioInsertado$.subscribe(value => {
-      // Se actuliza la vista de comentario
+      // Se actualiza la vista de comentario
       this.comentarioInsertado.comentario = this.nuevoComentario.comentario;
       this.comentarioInsertado.fecha = this.nuevoComentario.fecha;
       this.comentarioInsertado.puntuacionLibro = this.nuevoComentario.puntuacionLibro;
       this.comentarioInsertado.usuario.username = this._credencialesService.credenciales.usuario.username;
       this.comentarioInsertado.usuario.imagenUrl = this._credencialesService.credenciales.usuario.imagenUrl;
-      this.comentarios.splice(this.comentarios.length, 0, this.comentarioInsertado);
+      // this.comentarios.splice(this.comentarios.length, 0, this.comentarioInsertado);
+      location.reload();
       console.log('Comentario insertado');
       console.log(this.nuevoComentario);
       this.calcularPuntuacionLibro();
