@@ -42,7 +42,9 @@ export class CabeceraPedidoComponent implements OnInit {
   }
   ngOnInit() {
     this.numeroTarjeta = 'Elija su tarjeta';
-    this.obtenerTarjetas();
+    if (this._credencialesService.estaLogeado){
+      this.obtenerTarjetas();
+    }
   }
   registrarPedido() {
     if (this._credencialesService.credenciales !== undefined) {
@@ -88,7 +90,7 @@ export class CabeceraPedidoComponent implements OnInit {
         console.log('Cabecera insertada:');
         console.log(value);
         this.cabeceraPedido.id = value.id;
-         this.insertarDetalle();
+        this.insertarDetalle();
       }, error1 => {console.log(error1); });
   }
   private insertarDetalle() {
@@ -104,7 +106,7 @@ export class CabeceraPedidoComponent implements OnInit {
           this._carritoComprasService.detalles = [];
           this._carritoComprasService.guardar();
           this.exito = 'Ir al catálogo';
-          }, error1 => {console.log(error1); }
+        }, error1 => {console.log(error1); }
       );
     }
   }

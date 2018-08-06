@@ -15,7 +15,7 @@ const rutas: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full'},
   { path: 'login', component: LoginComponent, canActivate: [LoggedGuard] },
   { path: 'home', component: HomeComponent },
-  { path: 'registro', component: RegistroComponent },
+  { path: 'registro', component: RegistroComponent, canActivate: [LoggedGuard] },
   { path: 'catalogo', component: CatalogoComponent },
   { path: 'cuenta', component: CuentaComponent, canActivate: [AuthGuard]},
   { path: 'catalogo', component: CatalogoComponent },
