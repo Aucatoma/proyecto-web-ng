@@ -16,13 +16,17 @@ export class DatosPersonalesComponent implements OnInit, DoCheck {
 
   reader = new FileReader();
   usuarioForm: Usuario;
-
+  icon_pw = '';
+  icon_hide = 'assets/icon/hide_pw.png';
+  icon_show = 'assets/icon/show_pw.png';
+  pw_type = '';
   constructor() {
     this.reader.onload = () => {
       this.usuario.imagenUrl = this.reader.result;
       console.log(this.usuario.imagenUrl);
     };
-
+    this.icon_pw = this.icon_hide;
+    this.pw_type = 'password';
   }
 
   ngDoCheck(): void {
@@ -81,6 +85,16 @@ export class DatosPersonalesComponent implements OnInit, DoCheck {
   cambiarFoto(imageInput) {
     if (imageInput.files[0]) {
       this.reader.readAsDataURL(imageInput.files[0]);
+    }
+  }
+
+  togglePW() {
+    if (this.icon_pw === this.icon_hide) {
+      this.icon_pw = this.icon_show;
+      this.pw_type = 'text';
+    } else {
+      this.icon_pw = this.icon_hide;
+      this.pw_type = 'password';
     }
   }
 

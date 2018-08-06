@@ -15,3 +15,7 @@
 .padding-title {
   margin-bottom: 2ex;
 }
+
+#eye:hover {
+  cursor: pointer;
+}
